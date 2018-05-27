@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:title="@string/login_message"
+            app:titleTextColor="@android:color/white" />
+    </android.support.design.widget.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/iv_app_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/appbar_layout"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/app_icon"
+        android:minHeight="70dp"
+        android:minWidth="70dp" />
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_phone"
+            style="@style/Til"
+            android:layout_below="@+id/iv_app_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="11"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/ErrorAppearance"
+            app:hintTextAppearance="@style/TextAppearance.Design.Hint">
+            <EditText
+                android:id="@+id/et_phone"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                style="@style/et_single_line" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_phone"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                style="@style/Til"
+                android:layout_marginStart="0dp"
+                android:layout_weight="0.25"
+                app:counterEnabled="true"
+                app:counterMaxLength="4"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/ErrorAppearance"
+                app:hintTextAppearance="@style/TextAppearance.Design.Hint">
+                <EditText
+                    android:id="@+id/et_message"
+                    android:hint="@string/message"
+                    android:inputType="number"
+                    style="@style/et_single_line" />
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/btn_get_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_weight="0.75"
+                android:background="@drawable/selector_btn2"
+                android:minHeight="30dp"
+                android:text="@string/get_message"
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/btn_normal1"
+            android:layout_below="@+id/ll_msg"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/login" />
+
+</RelativeLayout>

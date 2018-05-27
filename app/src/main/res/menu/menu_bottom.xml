@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_navigation_homepage"
+        android:icon="@drawable/ic_homepage"
+        android:title="@string/homepage" />
+    <item
+        android:id="@+id/bottom_navigation_job_screen"
+        android:icon="@drawable/ic_jobs_screen"
+        android:title="@string/job_screen" />
+    <item
+        android:id="@+id/bottom_navigation_job_hiring"
+        android:icon="@drawable/ic_my_job"
+        android:title="@string/job_hiring" />
+</menu>

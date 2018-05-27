@@ -1,0 +1,207 @@
+<resources>
+
+    <!-- app主题风格 -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- toolbar颜色 -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- 状态栏颜色 -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="android:windowBackground">@color/colorWindow</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <!--输入框提示颜色-->
+        <!--输入框上方提示字体的颜色-->
+        <item name="android:textColorHint">@android:color/holo_blue_light</item>
+        <!--下划线没有获取焦点，也就是默认的颜色-->
+        <item name="colorControlNormal">@android:color/holo_blue_light</item>
+        <!--点击时下划线的颜色-->
+        <item name="colorControlActivated">@android:color/holo_green_light</item>
+        <item name="colorControlHighlight">@android:color/white</item>
+    </style>
+
+    <!--toolbar的样式-->
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+    <!--toolbar标题样式，该样式中标题居中，若要标题左侧显示，直接在toolbar设置标题-->
+    <style name="ToolbarTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!--设置DrawerArrowToggle风格-->
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <!--TextInputLayout 其中app:hintTextAppearance设置的是et上方的字体-->
+    <style name="Til" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:minHeight">40dp</item>
+    </style>
+    <!--输入框输入格式错误时的文字显示的样式-->
+    <style name="ErrorAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+    <!--EditText的单行样式-->
+    <style name="et_single_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:textSize">20sp</item>
+        <!--<item name="android:textColorHint">@android:color/holo_blue_light</item>-->
+        <item name="android:layout_gravity">start|center_vertical</item>
+    </style>
+
+
+
+    <!--个人中心点击头像 弹出的对话框样式-->
+    <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
+    </style>
+
+    <!-- ActionSheet进出动画 用于设置头像的对话框-->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+
+    <!--工作筛选栏进出动画-->
+    <style name="PopupWndScreen" parent="android:Animation"  mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/popup_screen_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_screen_out</item>
+    </style>
+
+    <!--日期选择对话框样式-->
+    <style name="DateDialog" parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <!--设置dialog不全屏-->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--ListView和ListView的文本的样式-->
+    <style name="list_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:background">@color/colorDarkGray</item>
+    </style>
+    <style name="list_view_tv_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+
+    <!--个人中心 每条信息的 RelativeLayout样式-->
+    <style name="rl_personal_center">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:onClick">onClick</item>
+        <item name="android:layout_marginTop">4dp</item>
+    </style>
+
+    <!--筛选条件的标题的样式-->
+    <style name="tv_screen_title">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/holo_orange_dark</item>
+        <item name="android:layout_gravity">fill</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_row">0</item>
+        <item name="android:layout_column">0</item>
+        <item name="android:layout_columnSpan">2</item>
+    </style>
+    <!--筛选条件的CheckBox的样式-->
+    <style name="ck_screen_item">
+        <item name="android:layout_gravity">fill</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/selector_screen_item_bg</item>
+        <item name="android:textColor">@color/selector_screen_item</item>
+    </style>
+
+    <!--底部导航栏btn的样式（比如筛选栏下方的按钮）-->
+    <style name="nav_btn_shape">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="nav_btn1" parent="nav_btn_shape">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/holo_red_light</item>
+    </style>
+    <style name="nav_btn2" parent="nav_btn_shape">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <!--普通按钮样式 登录注册按钮样式-->
+    <style name="btn_normal1">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minWidth">100dp</item>
+        <item name="android:minHeight">35dp</item>
+        <item name="android:background">@drawable/selector_btn1</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <!--普通按钮样式 背景色与父控件背景一致-->
+    <style name="btn_normal2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+</resources>

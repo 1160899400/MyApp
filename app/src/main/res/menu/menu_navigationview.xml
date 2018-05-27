@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_homepage"
+            android:icon="@drawable/ic_home"
+            android:title="@string/homepage"/>
+        <item
+            android:id="@+id/nav_personal_center"
+            android:icon="@drawable/icon_person"
+            android:title="@string/personal_center"/>
+        <item
+            android:id="@+id/nav_jobApplied"
+            android:icon="@drawable/ic_job_applied"
+            android:title="@string/my_apply"/>
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/exit"/>
+    </group>
+</menu>

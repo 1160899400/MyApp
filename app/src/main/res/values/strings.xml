@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">兼职go</string>
+
+    <!--底部导航栏menu item的显示-->
+    <string name="homepage">主页</string>
+    <string name="job_screen">精选</string>
+    <string name="job_hiring">热招中</string>
+
+    <!--左边导航栏menu item的显示-->
+    <string name="personal_center">个人中心</string>
+    <string name="my_apply">我的报名</string>
+    <string name="exit">退出</string>
+
+    <!--drawerToggle-->
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+
+    <string name="phone">手机号:</string>
+    <string name="pwd">密码:</string>
+
+
+    <!--get message code string-->
+    <string name="get_message">获取验证码</string>
+    <string name="message">验证码</string>
+
+
+    <!--loginActivity string-->
+    <string name="login_title">手机号密码登录</string>
+    <string name="login">登录</string>
+    <string name="reg_hint">还没有账号？点击注册</string>
+    <string name="login_message">短信验证登录</string>
+
+    <!--registerActivity string-->
+    <string name="register_title">注册</string>
+
+
+    <!--personal center-->
+    <string name="avatar">头像</string>
+    <string name="name">姓名</string>
+    <string name="gender">性别</string>
+    <string name="birthday">生日</string>
+    <string name="email">邮箱</string>
+    <string name="gov_id">身份证号</string>
+    <string name="education">学历</string>
+    <string name="introduction">个人介绍</string>
+
+    <!--job detail-->
+    <string name="job_detail">兼职详情</string>
+
+    <!--modify personal information-->
+    <string name="submit_modify">提交修改</string>
+
+
+    <!--条件查询-->
+    <string name="select_city">请选择城市</string>
+    <string-array name="cities">
+        <item>全部</item>
+        <item>武汉</item>
+        <item>北京</item>
+        <item>上海</item>
+        <item>广州</item>
+        <item>深圳</item>
+        <item>南昌</item>
+        <item>杭州</item>
+        <item>济南</item>
+        <item>长春</item>
+        <item>厦门</item>
+        <item>郑州</item>
+        <item>南京</item>
+    </string-array>
+</resources>

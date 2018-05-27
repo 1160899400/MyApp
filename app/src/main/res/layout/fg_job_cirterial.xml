@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDarkGray">
+
+    <LinearLayout
+        android:id="@+id/ll_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:minHeight="40dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinner_city"
+            style="@android:style/Theme.Holo.DialogWhenLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/cities"
+            android:prompt="@string/select_city"
+            android:spinnerMode="dialog"
+            android:textAlignment="center"
+            android:tooltipText="城市" />
+
+        <CheckBox
+            android:id="@+id/ck_screen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="false"
+            android:drawableEnd="@drawable/selector_screen_arrow"
+            android:drawablePadding="3dp"
+            android:gravity="end|center_vertical"
+            android:text="筛选"
+            android:textColor="@color/selector_menu_item"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_job_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_filter">
+        <ListView
+            android:id="@+id/job_list"
+            style="@style/list_view_style" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>
