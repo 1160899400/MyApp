@@ -13,11 +13,12 @@ import com.liu.jim.jobgo.util.EncryptUtil;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import retrofit2.HttpException;
 
 /**
  * Created by lenovo on 2018/4/26.
@@ -34,9 +35,11 @@ public class RegModel implements RegContract.IRegModel {
                 .register(requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<RegisterResult>() {
+                .subscribe(new Observer<RegisterResult>() {
+
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override
@@ -56,6 +59,13 @@ public class RegModel implements RegContract.IRegModel {
                             callBack.onFail("发生未知错误" + e.getMessage());
                         }
                     }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+
 
                     @Override
                     public void onNext(RegisterResult registerResult) {

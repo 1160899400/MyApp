@@ -9,10 +9,10 @@ import com.liu.jim.jobgo.entity.response.result.MessageResult;
 import com.liu.jim.jobgo.entity.response.result.ModifyInfoResult;
 import com.liu.jim.jobgo.entity.response.result.RegisterResult;
 
+import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import rx.Observable;
 
 /**
  * 网络请求接口
