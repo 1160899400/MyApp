@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.liu.jim.jobgo.view.activity.MainActivity;
-import com.liu.jim.jobgo.view.fragments.HomepageFragment;
-import com.liu.jim.jobgo.view.fragments.JobCriteriaFragment;
-import com.liu.jim.jobgo.view.fragments.JobHiringFragment;
+import com.liu.jim.jobgo.view.fragment.HomepageFragment;
+import com.liu.jim.jobgo.view.fragment.JobCriteriaFragment;
+import com.liu.jim.jobgo.view.fragment.JobHiringFragment;
 
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {

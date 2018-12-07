@@ -9,11 +9,13 @@ import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.inf.IHttpService;
+import com.liu.jim.jobgo.util.HttpExceptionUtil;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by lenovo on 2018/4/27.
@@ -30,15 +32,19 @@ public class JobSignedModel implements JobSignedContract.IJobSignedModel {
                 .getJobSigned(requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<JobSignedResult>() {
+                .subscribe(new Observer<JobSignedResult>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
-                        callBack.onFail(e.toString());
+                        HttpExceptionUtil.catchHttpException(e, callBack);
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override
@@ -56,7 +62,7 @@ public class JobSignedModel implements JobSignedContract.IJobSignedModel {
                 });
     }
 
-    private JobSignedRequest initJobSignedReq(){
+    private JobSignedRequest initJobSignedReq() {
         JobSignedRequest jobSignedRequest = new JobSignedRequest();
         CacheManager cm = CacheManager.getCacheManager();
         jobSignedRequest.setAccountId(cm.getAccountId(MyApplication.getContext()));

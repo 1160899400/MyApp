@@ -1,7 +1,9 @@
 package com.liu.jim.jobgo.model.inf;
 
 /**
+ * @author Hongzhi.Liu
  * Presenter层提供给Model回调的响应接口
+ * @param <T>
  */
 public interface IHttpCallBack <T>{
     public void onSuccess(T t);        //请求成功后的回调,将返回的数据传回

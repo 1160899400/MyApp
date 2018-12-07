@@ -23,7 +23,7 @@
                 android:text="@string/homepage" />
         </android.support.v7.widget.Toolbar>
 
-        <com.liu.jim.jobgo.view.myview.NoScrollViewPager
+        <com.liu.jim.jobgo.view.widget.NoScrollViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </com.liu.jim.jobgo.view.myview.NoScrollViewPager>
+        </com.liu.jim.jobgo.view.widget.NoScrollViewPager>
 
 
         <!--底部导航栏，app:itemIconTint设置图标选中和未选中时的颜色，app:itemTextColor设置文字选中和未选中时的颜色-->

@@ -1,4 +1,4 @@
-package com.liu.jim.jobgo.view.myview;
+package com.liu.jim.jobgo.view.widget;
 
 import android.content.Context;
 import android.os.Bundle;

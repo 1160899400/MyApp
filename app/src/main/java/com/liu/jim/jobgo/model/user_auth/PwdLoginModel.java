@@ -9,15 +9,13 @@ import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.inf.IHttpService;
 import com.liu.jim.jobgo.util.EncryptUtil;
+import com.liu.jim.jobgo.util.HttpExceptionUtil;
 
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 
 public class PwdLoginModel implements PwdLoginContract.IPwdLoginModel {
@@ -31,27 +29,19 @@ public class PwdLoginModel implements PwdLoginContract.IPwdLoginModel {
                 .pwdLogin(requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<LoginResult>() {
+                .subscribe(new Observer<LoginResult>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
-                        if (e instanceof HttpException) {
-                            HttpException httpException = (HttpException) e;
-                            int code = httpException.code();
-                            if (code == 500 || code == 404) {
-                                callBack.onFail("服务器出错");
-                            }
-                        } else if (e instanceof ConnectException) {
-                            callBack.onFail("网络断开,请打开网络!");
-                        } else if (e instanceof SocketTimeoutException) {
-                            callBack.onFail("网络连接超时!!");
-                        } else {
-                            callBack.onFail("发生未知错误" + e.getMessage());
-                        }
+                        HttpExceptionUtil.catchHttpException(e, callBack);
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override

@@ -8,9 +8,6 @@ import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.inf.IHttpService;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 

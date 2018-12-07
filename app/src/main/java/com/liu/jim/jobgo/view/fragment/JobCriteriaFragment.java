@@ -1,4 +1,4 @@
-package com.liu.jim.jobgo.view.fragments;
+package com.liu.jim.jobgo.view.fragment;
 
 import android.app.Activity;
 import android.graphics.Color;

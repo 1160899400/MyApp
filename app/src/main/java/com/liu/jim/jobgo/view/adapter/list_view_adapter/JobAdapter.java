@@ -16,7 +16,7 @@ import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.constants.IntentConstants;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
 import com.liu.jim.jobgo.view.activity.JobDetailActivity;
-import com.liu.jim.jobgo.view.myview.LoginTipDialog;
+import com.liu.jim.jobgo.view.widget.LoginTipDialog;
 
 import java.util.List;
 

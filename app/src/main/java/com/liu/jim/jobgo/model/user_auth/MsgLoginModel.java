@@ -8,15 +8,14 @@ import com.liu.jim.jobgo.entity.response.result.LoginResult;
 import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.inf.IHttpService;
+import com.liu.jim.jobgo.util.HttpExceptionUtil;
 
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
-
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by lenovo on 2018/4/26.
@@ -26,7 +25,7 @@ public class MsgLoginModel implements MsgLoginContract.IMsgLoginModel {
 
     @Override
     public void loginByMsg(String phone, String msg, int smsId, final IHttpCallBack<LoginResult> callBack) {
-        MessageLoginRequest messageLoginRequest = initMsgLognReq(phone,msg,smsId);
+        MessageLoginRequest messageLoginRequest = initMsgLognReq(phone, msg, smsId);
         String reqStr = new Gson().toJson(messageLoginRequest);
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), reqStr);
         RetrofitManager.getRetrofit()
@@ -34,27 +33,19 @@ public class MsgLoginModel implements MsgLoginContract.IMsgLoginModel {
                 .msgLogin(requestBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<LoginResult>() {
+                .subscribe(new Observer<LoginResult>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
-                        if (e instanceof HttpException) {
-                            HttpException httpException = (HttpException) e;
-                            int code = httpException.code();
-                            if (code == 500 || code == 404) {
-                                callBack.onFail("服务器出错");
-                            }
-                        } else if (e instanceof ConnectException) {
-                            callBack.onFail("网络断开,请打开网络!");
-                        } else if (e instanceof SocketTimeoutException) {
-                            callBack.onFail("网络连接超时!!");
-                        } else {
-                            callBack.onFail("发生未知错误" + e.getMessage());
-                        }
+                        HttpExceptionUtil.catchHttpException(e, callBack);
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override
@@ -65,7 +56,7 @@ public class MsgLoginModel implements MsgLoginContract.IMsgLoginModel {
     }
 
 
-    private MessageLoginRequest initMsgLognReq(String phone,String msg,int smsId){
+    private MessageLoginRequest initMsgLognReq(String phone, String msg, int smsId) {
         MessageLoginRequest messageLoginRequest = new MessageLoginRequest();
         messageLoginRequest.setAccountPhone(phone);
         messageLoginRequest.setCode(msg);

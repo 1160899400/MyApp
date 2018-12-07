@@ -26,10 +26,10 @@ import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.util.ACache;
 import com.liu.jim.jobgo.view.adapter.fragment.MyFragmentPagerAdapter;
-import com.liu.jim.jobgo.view.myview.ExitTipDialog;
-import com.liu.jim.jobgo.view.myview.LoginTipDialog;
-import com.liu.jim.jobgo.view.myview.LogoutTipDialog;
-import com.liu.jim.jobgo.view.myview.NoScrollViewPager;
+import com.liu.jim.jobgo.view.widget.ExitTipDialog;
+import com.liu.jim.jobgo.view.widget.LoginTipDialog;
+import com.liu.jim.jobgo.view.widget.LogoutTipDialog;
+import com.liu.jim.jobgo.view.widget.NoScrollViewPager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

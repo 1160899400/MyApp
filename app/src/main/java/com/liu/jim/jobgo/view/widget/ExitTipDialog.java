@@ -1,19 +1,18 @@
-package com.liu.jim.jobgo.view.myview;
+package com.liu.jim.jobgo.view.widget;
+
+
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.liu.jim.jobgo.MyApplication;
-import com.liu.jim.jobgo.view.activity.LoginActivity;
+import com.liu.jim.jobgo.manager.ActivityManager;
 
 /**
- * 登录提示框
+ * 退出app前弹出的对话框
  */
 
-public class LoginTipDialog extends TipDialog {
-
-    public LoginTipDialog(Context context) {
+public class ExitTipDialog extends TipDialog {
+    public ExitTipDialog(Context context) {
         super(context);
     }
 
@@ -25,8 +24,8 @@ public class LoginTipDialog extends TipDialog {
     }
 
     private void setText(){
-        super.setTitle("登录提醒");
-        super.setMessage("您还没登录，是否前去登录");
+        super.setTitle("退出提醒");
+        super.setMessage("您确定要退出app吗");
     }
 
     /**
@@ -36,15 +35,14 @@ public class LoginTipDialog extends TipDialog {
         super.setOnYesClickListener(new onYesOnclickListener() {
             @Override
             public void onYesClick() {
-                Intent intent = new Intent(MyApplication.getContext(),LoginActivity.class);
-                MyApplication.getContext().startActivity(intent);
-                LoginTipDialog.this.dismiss();
+                ExitTipDialog.this.dismiss();
+                ActivityManager.getActManager().exitApp();
             }
         });
         super.setOnNoClickListener(new onNoOnclickListener() {
             @Override
             public void onNoClick() {
-                LoginTipDialog.this.dismiss();
+                ExitTipDialog.this.dismiss();
             }
         });
     }
