@@ -15,7 +15,7 @@ import com.liu.jim.jobgo.model.job_info.JobDataByCrModel;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/5/5.
+ * Created by jim on 2018/5/5.
  */
 
 public class JobDataByCrPresenter implements JobDataByCrContract.IJobDataByCrPresenter {

@@ -1,7 +1,7 @@
 package com.liu.jim.jobgo.entity.request;
 
 /**
- * Created by lenovo on 2018/4/15.
+ * Created by jim on 2018/4/15.
  */
 
 import com.google.gson.annotations.Expose;

@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
 
 /**
- * Created by lenovo on 2018/4/27.
+ * Created by jim on 2018/4/27.
  */
 
 public class JobSignedModel implements JobSignedContract.IJobSignedModel {

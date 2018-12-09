@@ -20,7 +20,7 @@ import com.liu.jim.jobgo.view.widget.LoginTipDialog;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/5/8.
+ * Created by jim on 2018/5/8.
  */
 
 public class JobDisAdapter extends BaseAdapter {

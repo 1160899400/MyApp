@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 
 /**
  * 自定义的不可滑动的viewpager
- * Created by lenovo on 2018/4/3.
+ * Created by jim on 2018/4/3.
  */
 
 public class NoScrollViewPager extends ViewPager {

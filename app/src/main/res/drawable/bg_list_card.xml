@@ -3,5 +3,5 @@
     <!-- 矩形的圆角弧度 -->
     <corners android:radius="15dp" />
     <!-- 矩形的填充色 -->
-    <solid android:color="@color/cardview_light_background"/>
+    <solid android:color="@android:color/white"/>
 </shape>

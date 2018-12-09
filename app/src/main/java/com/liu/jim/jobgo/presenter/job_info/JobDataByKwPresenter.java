@@ -9,7 +9,7 @@ import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.job_info.JobDataByKwModel;
 
 /**
- * Created by lenovo on 2018/4/27.
+ * Created by jim on 2018/4/27.
  */
 
 public class JobDataByKwPresenter implements JobDataByKwContract.IJobDataByKwPresenter {

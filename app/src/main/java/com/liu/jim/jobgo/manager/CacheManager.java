@@ -12,7 +12,7 @@ import com.liu.jim.jobgo.entity.response.bean.LoginPersonalInfo;
 import com.liu.jim.jobgo.util.ACache;
 
 /**
- * Created by lenovo on 2018/4/8.
+ * Created by jim on 2018/4/8.
  */
 
 public class CacheManager {

@@ -14,7 +14,7 @@ import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
 /**
- * Created by lenovo on 2018/4/10.
+ * Created by jim on 2018/4/10.
  */
 
 public class CaptureActivity extends AppCompatActivity {

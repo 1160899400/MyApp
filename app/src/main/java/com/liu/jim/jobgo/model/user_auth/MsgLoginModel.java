@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 
 
 /**
- * Created by lenovo on 2018/4/26.
+ * Created by jim on 2018/4/26.
  */
 
 public class MsgLoginModel implements MsgLoginContract.IMsgLoginModel {

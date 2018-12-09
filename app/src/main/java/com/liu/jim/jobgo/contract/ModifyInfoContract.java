@@ -5,7 +5,7 @@ import com.liu.jim.jobgo.entity.response.result.ModifyInfoResult;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 
 /**
- * Created by lenovo on 2018/5/6.
+ * Created by jim on 2018/5/6.
  */
 
 public class ModifyInfoContract {

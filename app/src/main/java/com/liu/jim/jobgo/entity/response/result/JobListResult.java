@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.liu.jim.jobgo.entity.response.data.JobRowsData;
 
 /**
- * Created by lenovo on 2018/4/13.
+ * Created by jim on 2018/4/13.
  */
 
 public class JobListResult {

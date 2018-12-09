@@ -12,7 +12,7 @@ import com.liu.jim.jobgo.model.job_info.JobSignedModel;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/4/27.
+ * Created by jim on 2018/4/27.
  */
 
 public class JobSignedPresenter implements JobSignedContract.IJobSignedPresenter {

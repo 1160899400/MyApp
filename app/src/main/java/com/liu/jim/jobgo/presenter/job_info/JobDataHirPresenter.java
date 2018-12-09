@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/5/6.
+ * Created by jim on 2018/5/6.
  */
 
 public class JobDataHirPresenter implements JobDataHiringContract.IJobDataHirPresenter {

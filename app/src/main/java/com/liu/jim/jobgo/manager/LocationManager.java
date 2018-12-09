@@ -10,7 +10,7 @@ import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.entity.response.bean.Position;
 
 /**
- * Created by lenovo on 2018/4/15.
+ * Created by jim on 2018/4/15.
  */
 
 public class LocationManager {

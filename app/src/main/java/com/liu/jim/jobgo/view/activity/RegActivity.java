@@ -24,7 +24,7 @@ import com.liu.jim.jobgo.util.Validator;
 /**
  * 验证码登录/注册页面
  * reqType： 0 登录   1 注册
- * Created by lenovo on 2018/3/28.
+ * Created by jim on 2018/3/28.
  */
 
 public class RegActivity extends AppCompatActivity implements View.OnClickListener, GetMsgContract.IGetMsgView, RegContract.IRegView {

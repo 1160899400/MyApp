@@ -7,7 +7,7 @@ import com.liu.jim.jobgo.entity.response.bean.JobSignedInfo;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/4/21.
+ * Created by jim on 2018/4/21.
  */
 
 public class JobSignedRows {

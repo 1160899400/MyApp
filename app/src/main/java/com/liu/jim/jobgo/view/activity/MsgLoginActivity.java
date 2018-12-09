@@ -22,7 +22,7 @@ import com.liu.jim.jobgo.util.Validator;
 
 
 /**
- * Created by lenovo on 2018/4/15.
+ * Created by jim on 2018/4/15.
  */
 
 public class MsgLoginActivity extends AppCompatActivity implements View.OnClickListener, GetMsgContract.IGetMsgView, MsgLoginContract.IMsgLoginView {

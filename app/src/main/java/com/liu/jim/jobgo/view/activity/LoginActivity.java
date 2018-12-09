@@ -22,7 +22,7 @@ import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
 
 
 /**
- * Created by lenovo on 2018/3/8.
+ * Created by jim on 2018/3/8.
  */
 
 public class LoginActivity extends AppCompatActivity implements PwdLoginContract.IPwdLoginView {

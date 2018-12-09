@@ -35,7 +35,7 @@ import java.util.List;
 
 
 /**
- * Created by lenovo on 2018/3/6.
+ * Created by jim on 2018/3/6.
  */
 
 public class HomepageFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener, JobDataByDisContract.IJobDataByDisView {

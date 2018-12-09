@@ -32,7 +32,7 @@ import java.util.List;
 
 
 /**
- * Created by lenovo on 2018/3/6.
+ * Created by jim on 2018/3/6.
  */
 
 public class JobCriteriaFragment extends Fragment implements AdapterView.OnItemSelectedListener,  CompoundButton.OnCheckedChangeListener, View.OnClickListener, JobDataByCrContract.IJobDataByCrView {

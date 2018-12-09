@@ -19,7 +19,7 @@ import okhttp3.RequestBody;
 import retrofit2.HttpException;
 
 /**
- * Created by lenovo on 2018/4/26.
+ * Created by jim on 2018/4/26.
  */
 
 public class GetMsgModel implements GetMsgContract.IGetMsgModel {

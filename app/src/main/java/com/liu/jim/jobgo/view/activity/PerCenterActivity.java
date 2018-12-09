@@ -50,7 +50,7 @@ import java.util.Date;
 
 
 /**
- * Created by lenovo on 2018/4/4.
+ * Created by jim on 2018/4/4.
  */
 
 public class PerCenterActivity extends AppCompatActivity implements ViewGroup.OnClickListener, ModifyInfoContract.IModInfoView {

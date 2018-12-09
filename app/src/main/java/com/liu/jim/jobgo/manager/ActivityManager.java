@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by lenovo on 2018/4/4.
+ * Created by jim on 2018/4/4.
  */
 
 public class ActivityManager {

@@ -17,7 +17,7 @@ import com.liu.jim.jobgo.util.Validator;
 
 /**
  * 修改个人信息
- * Created by lenovo on 2018/4/9.
+ * Created by jim on 2018/4/9.
  */
 
 public class ModifyInfoActivity extends AppCompatActivity implements View.OnClickListener{

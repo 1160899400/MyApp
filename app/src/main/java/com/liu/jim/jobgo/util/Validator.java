@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by lenovo on 2018/3/29.
+ * Created by jim on 2018/3/29.
  */
 
 //登录验证器

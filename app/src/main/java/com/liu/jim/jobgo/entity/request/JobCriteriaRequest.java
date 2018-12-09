@@ -10,7 +10,7 @@ import com.liu.jim.jobgo.entity.response.bean.Screen;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/4/23.
+ * Created by jim on 2018/4/23.
  */
 
 public class JobCriteriaRequest {

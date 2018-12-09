@@ -9,7 +9,7 @@ import com.liu.jim.jobgo.entity.response.bean.Position;
  */
 
 public class JobDisRequest {
-    @SerializedName("location")
+    @SerializedName("locator")
     @Expose
     private Position location;
     @SerializedName("page")

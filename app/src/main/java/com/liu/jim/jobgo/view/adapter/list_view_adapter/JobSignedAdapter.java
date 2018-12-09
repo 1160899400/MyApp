@@ -21,7 +21,7 @@ import com.liu.jim.jobgo.view.activity.JobDetailActivity;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/4/19.
+ * Created by jim on 2018/4/19.
  */
 
 public class JobSignedAdapter extends BaseAdapter {

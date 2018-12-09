@@ -7,7 +7,7 @@ import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/5/6.
+ * Created by jim on 2018/5/6.
  */
 
 public class JobDataHiringContract {

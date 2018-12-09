@@ -1,7 +1,7 @@
 package com.liu.jim.jobgo.util;
 
 /**
- * Created by lenovo on 2018/5/5.
+ * Created by jim on 2018/5/5.
  */
 
 

@@ -28,7 +28,7 @@ import com.liu.jim.jobgo.presenter.job_info.JobDetailPresenter;
 import com.liu.jim.jobgo.util.ACache;
 
 /**
- * Created by lenovo on 2018/4/5.
+ * Created by jim on 2018/4/5.
  */
 
 public class JobDetailActivity extends AppCompatActivity implements View.OnClickListener, JobDetailContract.IJobDetailView, ApplyJobContract.IApplyJobView {

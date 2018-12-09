@@ -8,7 +8,7 @@ import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.user_auth.RegModel;
 
 /**
- * Created by lenovo on 2018/4/26.
+ * Created by jim on 2018/4/26.
  */
 
 public class RegPresenter implements RegContract.IRegPresenter {

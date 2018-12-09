@@ -14,7 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by lenovo on 2018/4/20.
+ * Created by jim on 2018/4/20.
  */
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {

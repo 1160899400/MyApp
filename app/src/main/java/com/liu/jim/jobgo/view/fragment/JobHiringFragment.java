@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/3/6.
+ * Created by jim on 2018/3/6.
  */
 
 public class JobHiringFragment extends Fragment implements JobDataHiringContract.IJobDataHirView {
