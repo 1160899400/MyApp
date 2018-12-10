@@ -66,7 +66,7 @@ dependencies {
     //百度定位api
     implementation files('libs/BaiduLBS_Android.jar')
     // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.0"
     // 加载提示
     implementation 'com.github.ForgetAll:LoadingDialog:v1.0.4'
     //RxJava以及RxAndroid库
@@ -82,9 +82,5 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'org.greenrobot:greendao-generator:3.2.2'
 
-}
-repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
 }
 
