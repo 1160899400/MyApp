@@ -9,19 +9,19 @@ import android.os.Parcelable;
 public class Location implements Parcelable {
 
     //纬度
-    public double latitude;
+    private double latitude;
 
     //经度
-    public double longitude;
+    private double longitude;
 
     //省
-    public String province;
+    private String province;
 
     //市
-    public String city;
+    private String city;
 
     //区
-    public String district;
+    private String district;
 
     public Location() {
     }
@@ -71,4 +71,48 @@ public class Location implements Parcelable {
         return false;
     }
 
+    @Override
+    public String toString(){
+        return province + city + district;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 }

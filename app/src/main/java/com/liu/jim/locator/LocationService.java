@@ -11,7 +11,7 @@ import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.liu.jim.ILocationService;
+import com.liu.jim.ILocationManager;
 
 /**
  * @author Hongzhi.Liu
@@ -23,17 +23,28 @@ public class LocationService extends Service {
 
     private static Location location;
 
-    private LocationListener locationListener;
+    private LocationListener mLocationListener;
 
     /**
      * 传出返回的定位结果
      */
     private BDAbstractLocationListener bdLocationListener = new MyLocationListener();
 
-    private Binder mBinder = new ILocationService.Stub() {
+    private final Binder mBinder = new ILocationManager.Stub() {
+
         @Override
-        public void getLocation(LocationListener locationListener) throws RemoteException {
-            locationListener.onReturnLocation(location);
+        public void registerListener(LocationListener locationListener) throws RemoteException {
+            mLocationListener = locationListener;
+        }
+
+        @Override
+        public void getLocation() throws RemoteException {
+            locationClient.start();
+        }
+
+        @Override
+        public void unregisterListener() throws RemoteException {
+            mLocationListener = null;
         }
     };
 
@@ -94,7 +105,7 @@ public class LocationService extends Service {
 
         locationClient.setLocOption(option);
         //需将配置好的LocationClientOption对象，通过setLocOption方法传递给LocationClient对象使用
-        locationClient.start();
+
     }
 
     @Nullable
@@ -107,10 +118,12 @@ public class LocationService extends Service {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             try {
-                if (location != null && !Location.isNull(location)) {
-                    locationListener.onReturnLocation(location);
-                }
-
+                location.setLongitude(bdLocation.getLongitude());
+                location.setLatitude(bdLocation.getLatitude());
+                location.setProvince(bdLocation.getProvince());
+                location.setCity(bdLocation.getCity());
+                location.setDistrict(bdLocation.getDistrict());
+                mLocationListener.onReturnLocation(location);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
