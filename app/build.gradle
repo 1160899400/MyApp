@@ -42,6 +42,8 @@ android {
 
 
 dependencies {
+    def room_version = '1.1.1'
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.2'
     testImplementation 'junit:junit:4.12'
@@ -75,12 +77,15 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.3.2'
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
-    //圆形imageview
+    //圆形ImageView
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 
-    // GreenDao
-    implementation 'org.greenrobot:greendao:3.2.2'
-    implementation 'org.greenrobot:greendao-generator:3.2.2'
+    //room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    //use KAPT for kotlin
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+    //rxjava support for Room
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
 
 }
 
