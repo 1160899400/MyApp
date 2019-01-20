@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'io.objectbox'
 
 android {
     compileSdkVersion 27
@@ -37,12 +37,12 @@ android {
             universalApk true
         }
     }
+
 }
 
 
 
 dependencies {
-    def room_version = '1.1.1'
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.0.2'
@@ -50,8 +50,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:27.0.2'
-
-
 
     // ZXing库
     implementation 'com.google.zxing:core:3.2.1'
@@ -64,11 +62,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
 
     // Okhttp库
-    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
     //百度定位api
     implementation files('libs/BaiduLBS_Android.jar')
     // kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.11"
     // 加载提示
     implementation 'com.github.ForgetAll:LoadingDialog:v1.0.4'
     //RxJava以及RxAndroid库
@@ -80,12 +78,8 @@ dependencies {
     //圆形ImageView
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 
-    //room
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    //use KAPT for kotlin
-    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-    //rxjava support for Room
-    implementation "android.arch.persistence.room:rxjava2:$room_version"
+    //ObjectBox
+
 
 }
 
