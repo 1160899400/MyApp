@@ -1,12 +1,21 @@
-package com.liu.jim.locator;
+package com.liu.jim.jobgo.db.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Transient;
+
 /**
  * @author HZLI02
  */
+
+@Entity
 public class Location implements Parcelable {
+
+    @Id
+    private long id;
 
     //纬度
     private double latitude;
@@ -14,14 +23,16 @@ public class Location implements Parcelable {
     //经度
     private double longitude;
 
-    //省
     private String province;
 
-    //市
     private String city;
 
-    //区
     private String district;
+
+    /**
+     * 具体地址
+     */
+    private String address;
 
     public Location() {
     }
@@ -49,6 +60,7 @@ public class Location implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
         dest.writeString(province);
@@ -57,6 +69,7 @@ public class Location implements Parcelable {
     }
 
     public void readFromParcel(Parcel src) {
+        id = src.readLong();
         latitude = src.readDouble();
         longitude = src.readDouble();
         province = src.readString();
@@ -64,16 +77,19 @@ public class Location implements Parcelable {
         district = src.readString();
     }
 
-    public static boolean isNull(Location location){
-        if (null == location.province || null == location.city || location.district == null){
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public String toString(){
         return province + city + district;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public double getLatitude() {
@@ -114,5 +130,13 @@ public class Location implements Parcelable {
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

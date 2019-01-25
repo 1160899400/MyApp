@@ -1,4 +1,4 @@
 // Location.aidl
-package com.liu.jim.locator;
+package com.liu.jim.jobgo.db.model;
 
 parcelable Location;
