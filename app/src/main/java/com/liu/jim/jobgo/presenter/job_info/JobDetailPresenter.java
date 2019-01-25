@@ -4,7 +4,7 @@ import android.widget.Toast;
 
 import com.liu.jim.jobgo.MyApplication;
 import com.liu.jim.jobgo.contract.job_info.JobDetailContract;
-import com.liu.jim.jobgo.entity.response.bean.JobDetail;
+import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.entity.response.result.JobDetailResult;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.job_info.JobDetailModel;
@@ -32,7 +32,7 @@ public class JobDetailPresenter implements JobDetailContract.IJobDetailPresenter
                     mIJobDetailView.showJobDetail(null);
                     Toast.makeText(MyApplication.getContext(),"请检查网络设置后重试",Toast.LENGTH_SHORT).show();
                 }else {
-                    JobDetail jobDetail = jobDetailResult.getJobDetailData().getJobDetail();
+                    Job jobDetail = jobDetailResult.getJobDetailData().getJobDetail();
                     mIJobDetailView.showJobDetail(jobDetail);
                 }
             }

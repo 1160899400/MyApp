@@ -2,7 +2,7 @@ package com.liu.jim.jobgo.entity.response.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.liu.jim.jobgo.entity.response.bean.JobDetail;
+import com.liu.jim.jobgo.db.model.Job;
 
 /**
  * 用于描述岗位详细信息的data字段
@@ -11,13 +11,13 @@ import com.liu.jim.jobgo.entity.response.bean.JobDetail;
 public class JobDetailData {
     @SerializedName("data")
     @Expose
-    private JobDetail jobDetail;
+    private Job jobDetail;
 
-    public JobDetail getJobDetail() {
+    public Job getJobDetail() {
         return jobDetail;
     }
 
-    public void setJobDetail(JobDetail jobDetail) {
+    public void setJobDetail(Job jobDetail) {
         this.jobDetail = jobDetail;
     }
 }

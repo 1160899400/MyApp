@@ -1,6 +1,6 @@
 package com.liu.jim.jobgo.contract.job_info;
 
-import com.liu.jim.jobgo.entity.response.bean.JobDetail;
+import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.entity.response.result.JobDetailResult;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 
@@ -11,7 +11,7 @@ import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 public class JobDetailContract {
     //视图层
     public interface IJobDetailView {
-        public void showJobDetail(JobDetail jobDetail);
+        public void showJobDetail(Job jobDetail);
     }
 
     //视图与逻辑处理的业务层

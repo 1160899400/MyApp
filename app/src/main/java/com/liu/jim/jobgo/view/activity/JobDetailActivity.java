@@ -19,8 +19,9 @@ import com.liu.jim.jobgo.constants.IntentConstants;
 import com.liu.jim.jobgo.constants.JobApplyStateConstants;
 import com.liu.jim.jobgo.contract.ApplyJobContract;
 import com.liu.jim.jobgo.contract.job_info.JobDetailContract;
+import com.liu.jim.jobgo.db.model.Location;
 import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
-import com.liu.jim.jobgo.entity.response.bean.JobDetail;
+import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.ApplyJobPresenter;
@@ -55,7 +56,7 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
     private JobDetailPresenter jobDetailPresenter;
     private ApplyJobPresenter applyJobPresenter;
 
-    private JobDetail jobDetail;
+    private Job jobDetail;
 
 
     @Override
@@ -113,32 +114,32 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
     /**
      * 将返回的jobDtail显示
      *
-     * @param jobDetail
+     * @param job
      */
     @Override
-    public void showJobDetail(JobDetail jobDetail) {
-        if (jobDetail == null) {
+    public void showJobDetail(Job job) {
+        if (job == null) {
             setContentView(R.layout.item_no_data);
             NoticeManager.build(this).loadFail();        //兼职详情加载完毕
         } else {
-            this.jobDetail = jobDetail;
-            String jobAdr = jobDetail.getJobAddress();
-            String jobStime = jobDetail.getJobStime();
-            String jobEtime = jobDetail.getJobEtime();
-            String workTime = jobDetail.getJobJobperiod();
-            String jobCity = jobDetail.getJobCity();
-            String jobHotspot = jobDetail.getJobHotspot();
-            String jobAdress = jobDetail.getJobAddress();
-            if (jobDetail.getJobName() == null || jobDetail.getJobName().equals("")){
+            this.jobDetail = job;
+            Location jobLocation = job.getLocation().getTarget();
+            String city = jobLocation.getCity();
+            String district = jobLocation.getDistrict();
+            String address = jobLocation.getAddress();
+            String startTime = job.getStartTime();
+            String endTime = job.getEndTime();
+            String workTime = job.getPeriod();
+            if (job.getName() == null){
                 tv_jobName.setText("工作名称暂无");
             }else {
-                tv_jobName.setText(jobDetail.getJobName());
+                tv_jobName.setText(job.getName());
             }
             String state;                                               //工作状态
-            if (jobDetail.getJobState() == null) {
+            if (job.getState() == null) {
                 state = "兼职状态：不明";
             } else {
-                state = "兼职状态" + jobDetail.getJobState();
+                state = "兼职状态" + job.getState();
             }
             switch (appState) {
                 case JobApplyStateConstants.APPLYING:
@@ -183,126 +184,126 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
             }
             btn_operation.setOnClickListener(this);
             tv_jobState.setText(state);
-            String jobPlace = "工作地点:";               //工作地点
-            if (jobCity == null || jobCity.equals("")) {
+            String jobPlace = "工作地点:";
+            if (city == null || city.equals("")) {
                 jobPlace += "工作城市不明/";
             } else {
-                jobPlace += jobCity + "/";
+                jobPlace += city + "/";
             }
-            if (jobHotspot == null || jobHotspot.equals("")) {
+            if (district == null || district.equals("")) {
                 jobPlace += "地区不明/";
             } else {
-                jobPlace += jobHotspot;
+                jobPlace += district;
             }
             tv_jobPlace.setText(jobPlace);
-            if (jobAdress == null) {                    //工作地址
-                tv_jobAdr.setText("具体地址：地址不明");
+            if (address == null) {
+                tv_jobAdr.setText("不明");
             } else {
-                tv_jobAdr.setText("具体地址：" + jobAdr);
+                tv_jobAdr.setText(address);
             }
-            String jobDate = "工作日期:";               //工作日期
-            if (jobStime == null) {
+            String jobDate = "工作日期:";
+            if (startTime == null) {
                 jobDate += "起始日期未定/";
             } else {
-                jobDate += jobStime + "/";
+                jobDate += startTime + "/";
             }
-            if (jobEtime == null) {
+            if (endTime == null) {
                 jobDate += "结束日期未定";
             } else {
-                jobDate += jobEtime;
+                jobDate += endTime;
             }
             tv_jobDate.setText(jobDate);
-            if (workTime == null) {                     //工作时辰
+            if (workTime == null) {
                 tv_workTime.setText("工作时间:未定");
             } else {
                 tv_workTime.setText("工作时间:" + workTime);
             }
-            if (jobDetail.getJobDescription() == null || jobDetail.getJobDescription().equals("")) {               //工作描述
+            if (job.getDescription() == null || job.getDescription().equals("")) {
                 tv_jobDesc.setText("工作描述：暂无");
             } else {
-                tv_jobDesc.setText("工作描述：" + jobDetail.getJobDescription());
+                tv_jobDesc.setText("工作描述：" + job.getDescription());
             }
 
-            if (jobDetail.getJobPayType() == null || jobDetail.getJobPayType().equals("") ) {       //结算类型
+            if (job.getPayType() == null) {
                 tv_payType.setText("薪资结算方式:未定");
             } else {
-                tv_payType.setText("薪资结算方式:" + jobDetail.getJobPayType());
+                tv_payType.setText("薪资结算方式:" + job.getPayType());
             }
-            if (jobDetail.getJobCredit() == 0){                        //工作评分
+            if (job.getCredit() == 0){
                 tv_jobCredit.setText("他人评分:暂无评分");
             }else {
-                tv_jobCredit.setText("他人评分:" + String.valueOf(jobDetail.getJobCredit()));
+                tv_jobCredit.setText("他人评分:" + String.valueOf(job.getCredit()));
             }
-            if (jobDetail.getJobNumber() == 0){         //招聘人数
+            if (job.getNumber() == 0){
                 tv_jobNumber.setText("招聘人数:不明");
             }else {
-                tv_jobNumber.setText("招聘人数:" + jobDetail.getJobNumber());
+                tv_jobNumber.setText("招聘人数:" + job.getNumber());
             }
-            if (jobDetail.getJobIsurgent() == null || jobDetail.getJobIsurgent().equals("")){       //招聘紧迫程度
-                tv_jobUrgent.setText("招聘热度：未知");
-            }else {
-                tv_jobUrgent.setText("招聘热度：" + jobDetail.getJobIsurgent());
+            if (job.isUrgent()){
+                tv_jobUrgent.setText("急聘");
             }
-            switch (jobDetail.getJobWorkType()) {
-                case "调研":
+            switch (job.getType()) {
+                case 1:
                     iv_jobType.setImageResource(R.mipmap.job_type1);
                     break;
-                case "送餐员":
+                case 2:
                     iv_jobType.setImageResource(R.mipmap.job_type2);
                     break;
-                case "促销":
+                case 3:
                     iv_jobType.setImageResource(R.mipmap.job_type3);
                     break;
-                case "礼仪":
+                case 4:
                     iv_jobType.setImageResource(R.mipmap.job_type4);
                     break;
-                case "安保":
+                case 5:
                     iv_jobType.setImageResource(R.mipmap.job_type5);
                     break;
-                case "销售":
+                case 6:
                     iv_jobType.setImageResource(R.mipmap.job_type6);
                     break;
-                case "服务员":
+                case 7:
                     iv_jobType.setImageResource(R.mipmap.job_type7);
                     break;
-                case "临时工":
+                case 8:
                     iv_jobType.setImageResource(R.mipmap.job_type8);
                     break;
-                case "校内":
+                case 9:
                     iv_jobType.setImageResource(R.mipmap.job_type9);
                     break;
-                case "设计":
+                case 10:
                     iv_jobType.setImageResource(R.mipmap.job_type10);
                     break;
-                case "文员":
+                case 11:
                     iv_jobType.setImageResource(R.mipmap.job_type11);
                     break;
-                case "派单":
+                case 12:
                     iv_jobType.setImageResource(R.mipmap.job_type12);
                     break;
-                case "家教":
+                case 13:
                     iv_jobType.setImageResource(R.mipmap.job_type13);
                     break;
-                case "演出":
+                case 14:
                     iv_jobType.setImageResource(R.mipmap.job_type14);
                     break;
-                case "客服":
+                case 15:
                     iv_jobType.setImageResource(R.mipmap.job_type15);
                     break;
-                case "翻译":
+                case 16:
                     iv_jobType.setImageResource(R.mipmap.job_type16);
                     break;
-                case "实习":
+                case 17:
                     iv_jobType.setImageResource(R.mipmap.job_type17);
                     break;
-                case "模特":
+                case 18:
                     iv_jobType.setImageResource(R.mipmap.job_type18);
                     break;
+                case 0:
                 default:
                     iv_jobType.setImageResource(R.mipmap.job_type_unknown);
                     break;
             }
-            NoticeManager.build(this).loadSuccess();        //兼职详情加载完毕
+            //兼职详情加载完毕
+            NoticeManager.build(this).loadSuccess();
         }
 
     }
@@ -313,7 +314,7 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_operation) {          //点击操作按钮
-            String jobState = jobDetail.getJobState();
+            String jobState = jobDetail.getState();
             if (jobState == null || jobState.equals("招聘中")) {        //如果该兼职的状态为空或招聘中，则可以报名
                 switch (appState) {
                     case JobApplyStateConstants.APPLYING:       //取消报名

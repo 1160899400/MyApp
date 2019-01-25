@@ -11,7 +11,7 @@ import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.constants.IntentConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDetailContract;
 import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
-import com.liu.jim.jobgo.entity.response.bean.JobDetail;
+import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.job_info.JobDetailPresenter;
@@ -63,7 +63,7 @@ public class MyJobDetailActivity extends AppCompatActivity implements JobDetailC
     }
 
     @Override
-    public void showJobDetail(JobDetail jobDetail) {
+    public void showJobDetail(Job jobDetail) {
 
     }
 }
