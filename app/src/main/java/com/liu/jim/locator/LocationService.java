@@ -12,6 +12,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.liu.jim.ILocationManager;
+import com.liu.jim.jobgo.db.model.Location;
 
 /**
  * @author Hongzhi.Liu

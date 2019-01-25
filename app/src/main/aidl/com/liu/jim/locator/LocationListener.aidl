@@ -2,7 +2,7 @@
 package com.liu.jim.locator;
 
 // Declare any non-default types here with import statements
-import com.liu.jim.locator.Location;
+import com.liu.jim.jobgo.db.model.Location;
 interface LocationListener {
     /**
      * Demonstrates some basic types that you can use as parameters
