@@ -3,12 +3,12 @@ package com.liu.jim.jobgo.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,9 +17,10 @@ import java.util.TimerTask;
  * Created by jim on 2018/4/20.
  */
 
-public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class WelcomeActivity extends BaseActivity implements View.OnClickListener {
 
-    private int TimeWel = 5;//跳过倒计时提示5秒
+    //跳过倒计时提示5秒
+    private int TimeWel = 5;
     private TextView tv_skip;
     Timer timer = new Timer();
     private Handler handler;
@@ -32,8 +33,6 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         int flag= WindowManager.LayoutParams.FLAG_FULLSCREEN;
         //设置当前窗体为全屏显示
         getWindow().setFlags(flag, flag);
-        setContentView(R.layout.activity_welcome);
-        initView();
         timer.schedule(task, 1000, 1000);//等待时间一秒，停顿时间一秒
         /**
          * 正常情况下不点击跳过
@@ -51,10 +50,17 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private void initView() {
+    @Override
+    protected void bindView() {
         tv_skip = findViewById(R.id.tv_skip);//跳过
         tv_skip.setOnClickListener(this);//跳过监听
     }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_welcome;
+    }
+
 
     TimerTask task = new TimerTask() {
         @Override

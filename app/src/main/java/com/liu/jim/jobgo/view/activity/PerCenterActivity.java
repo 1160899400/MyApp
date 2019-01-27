@@ -14,7 +14,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,6 +30,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.liu.jim.jobgo.MyApplication;
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.ModifyInfoContract;
@@ -53,7 +53,7 @@ import java.util.Date;
  * Created by jim on 2018/4/4.
  */
 
-public class PerCenterActivity extends AppCompatActivity implements ViewGroup.OnClickListener, ModifyInfoContract.IModInfoView {
+public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClickListener, ModifyInfoContract.IModInfoView {
 
     private Toolbar mToolbar;
 
@@ -104,8 +104,6 @@ public class PerCenterActivity extends AppCompatActivity implements ViewGroup.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_personal_center);
-        bindView();
         setToolbar();
         initPersonalInfo();
         showInfo();
@@ -223,7 +221,8 @@ public class PerCenterActivity extends AppCompatActivity implements ViewGroup.On
         NoticeManager.build(this).loadSuccess();
     }
 
-    public void bindView() {
+    @Override
+    protected void bindView() {
         mToolbar = findViewById(R.id.toolbar);
 
         iv_avatar = findViewById(R.id.image_avatar);
@@ -236,6 +235,11 @@ public class PerCenterActivity extends AppCompatActivity implements ViewGroup.On
         tv_phone = findViewById(R.id.tv_phone);
         tv_introduction = findViewById(R.id.tv_introduction);
 
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_personal_center;
     }
 
     public void setToolbar() {

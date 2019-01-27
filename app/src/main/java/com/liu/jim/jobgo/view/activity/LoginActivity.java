@@ -3,7 +3,6 @@ package com.liu.jim.jobgo.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.contract.user_auth.PwdLoginContract;
 import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
@@ -25,7 +25,7 @@ import com.xiasuhuei321.loadingdialog.view.LoadingDialog;
  * Created by jim on 2018/3/8.
  */
 
-public class LoginActivity extends AppCompatActivity implements PwdLoginContract.IPwdLoginView {
+public class LoginActivity extends BaseActivity implements PwdLoginContract.IPwdLoginView {
     private Toolbar mToolbar;
     private Button btnLogin;
     private Button btnRegister;
@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity implements PwdLoginContract
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pwdLoginPresenter = new PwdLoginPresenter(this);
-        setContentView(R.layout.activity_pwd_login);
-        bindView();
         setToolbar();
         initBtnClickListener();
         ActivityManager actManager = ActivityManager.getActManager();
@@ -49,16 +47,19 @@ public class LoginActivity extends AppCompatActivity implements PwdLoginContract
     }
 
 
-    /**
-     * 绑定视图资源对象
-     */
-    private void bindView() {
+    @Override
+    protected void bindView() {
         mToolbar = findViewById(R.id.toolbar);
         btnLogin = findViewById(R.id.btn_login);
         btnRegister = findViewById(R.id.btn_register);
         etPhone = findViewById(R.id.et_phone);
         etPwd = findViewById(R.id.et_pwd);
         btnLoginMessage = findViewById(R.id.btn_login_message);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_pwd_login;
     }
 
 

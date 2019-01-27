@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 
 import com.liu.jim.jobgo.MyApplication;
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.manager.ActivityManager;
@@ -38,7 +38,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * 分为3个fragment实现
  */
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
 
 
     private TextView toolbarTitle;
@@ -60,10 +60,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setTheme(R.style.AppTheme);
         checkLoginStatus();
-        bindView();
         setToolbar();
         setViewPagerAdp();
         addDrawerToggle();
@@ -75,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     }
 
-    //将控件变量与资源id绑定
-    private void bindView() {
+    @Override
+    protected void bindView() {
         toolbarTitle = findViewById(R.id.tv_toolbar_title);
         mtoolbar = findViewById(R.id.toolbar);
         mtoolbar.setTitle("");
@@ -88,6 +86,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         mEmail = mNavigationView.getHeaderView(0).findViewById(R.id.tv_user_email);
         mBottomNavigationView = findViewById(R.id.bottom_navigation);
         viewPager = findViewById(R.id.viewPager);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_main;
     }
 
 
@@ -130,14 +133,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             } else {
                 mAvadar.setImageResource(R.mipmap.app_icon);
             }
-            if (name == null){
+            if (name == null) {
                 mName.setText("请设置姓名");
-            }else {
+            } else {
                 mName.setText("您好，" + name);
             }
-            if(email == null){
+            if (email == null) {
                 mEmail.setText("还未设置邮箱");
-            }else {
+            } else {
                 mEmail.setText(email);
             }
         } else {
@@ -215,7 +218,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                             logoutTipDialog.show();
                         }
                         break;
-
+                    default:
+                        break;
                 }
                 menuItem.setChecked(true);//点击了把它设为选中状态
                 mdrawerLayout.closeDrawers();//关闭抽屉
@@ -255,6 +259,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
                     case R.id.bottom_navigation_job_hiring:
                         viewPager.setCurrentItem(PAGE_THREE);
                         return true;
+                    default:
+                        break;
                 }
                 return false;
             }

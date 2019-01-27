@@ -2,7 +2,6 @@ package com.liu.jim.jobgo.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.util.Validator;
 
@@ -20,7 +20,7 @@ import com.liu.jim.jobgo.util.Validator;
  * Created by jim on 2018/4/9.
  */
 
-public class ModifyInfoActivity extends AppCompatActivity implements View.OnClickListener{
+public class ModifyInfoActivity extends BaseActivity implements View.OnClickListener{
     private int reqType;
     private EditText et_modify_Info;
     private Button submit_modify_info;
@@ -29,21 +29,22 @@ public class ModifyInfoActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify_info);
-        bindView();
         initReqType();
         ActivityManager actManager = ActivityManager.getActManager();
         actManager.addActivity("LoginActivity", this);
-
-
-
     }
 
-    public void bindView(){
+    @Override
+    protected void bindView(){
         et_modify_Info = findViewById(R.id.et_modify_info);
         submit_modify_info = findViewById(R.id.btn_submit_modify);
         submit_modify_info.setOnClickListener(this);
         toolbar = findViewById(R.id.toolbar);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_modify_info;
     }
 
     /**

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.contract.user_auth.GetMsgContract;
 import com.liu.jim.jobgo.contract.user_auth.MsgLoginContract;
 import com.liu.jim.jobgo.entity.response.result.MessageResult;
@@ -25,7 +25,7 @@ import com.liu.jim.jobgo.util.Validator;
  * Created by jim on 2018/4/15.
  */
 
-public class MsgLoginActivity extends AppCompatActivity implements View.OnClickListener, GetMsgContract.IGetMsgView, MsgLoginContract.IMsgLoginView {
+public class MsgLoginActivity extends BaseActivity implements View.OnClickListener, GetMsgContract.IGetMsgView, MsgLoginContract.IMsgLoginView {
 
     private int smsId;
     private String phone;
@@ -41,18 +41,15 @@ public class MsgLoginActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_login);
         timeCount = new TimeCount(60000, 1000);
         getMsgPresenter = new GetMsgPresenter(this);
         msgLoginPresenter = new MsgLoginPresenter(this);
-        bindView();
         setToolbar();
         ActivityManager.getActManager().addActivity("MsgLoginActivity", this);
     }
 
-    /**
-     * 绑定控件变量和资源id
-     */
+
+    @Override
     public void bindView() {
         mToolbar = findViewById(R.id.toolbar);
         et_phone = findViewById(R.id.et_phone);
@@ -62,6 +59,11 @@ public class MsgLoginActivity extends AppCompatActivity implements View.OnClickL
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
 
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_message_login;
     }
 
     public void setToolbar() {
@@ -87,6 +89,8 @@ public class MsgLoginActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btn_login:
                 msgLoginPresenter.loginByMsg(et_phone.getText().toString(), et_message.getText().toString(), smsId);
                 break;
+            default:
+                break;
         }
     }
 
@@ -98,7 +102,6 @@ public class MsgLoginActivity extends AppCompatActivity implements View.OnClickL
         byte bt = 0;
         getMsgPresenter.getMsg(phone, bt);
     }
-
 
 
     @Override
@@ -114,16 +117,16 @@ public class MsgLoginActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void showLoginResult(int resultCode) {
-        if (resultCode == 1){
+        if (resultCode == 1) {
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
             ActivityManager activityManager = ActivityManager.getActManager();
             activityManager.destroyActivity("MainActivity");
             Intent intent = new Intent(MsgLoginActivity.this, MainActivity.class);
             startActivity(intent);
             activityManager.destroyActivity("MsgLoginActivity");
-        }else if (resultCode == 2){
+        } else if (resultCode == 2) {
 
-        }else {
+        } else {
             Toast.makeText(this, "手机号未注册和密码错误", Toast.LENGTH_SHORT).show();
         }
 
@@ -162,7 +165,7 @@ public class MsgLoginActivity extends AppCompatActivity implements View.OnClickL
             getMsgPresenter = null;
             System.gc();
         }
-        if (msgLoginPresenter != null){
+        if (msgLoginPresenter != null) {
             msgLoginPresenter.onDestroy();
             msgLoginPresenter = null;
             System.gc();

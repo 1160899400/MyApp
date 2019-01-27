@@ -64,7 +64,6 @@
         <activity android:name=".view.activity.MsgLoginActivity" />
         <activity android:name=".view.activity.CaptureActivity" />
         <activity android:name=".view.activity.JobSignedActivity"/>
-        <activity android:name=".view.activity.MyJobDetailActivity"/>
     </application>
 
 </manifest>

@@ -4,11 +4,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.contract.job_info.JobSignedContract;
 import com.liu.jim.jobgo.entity.response.bean.JobSignedInfo;
 import com.liu.jim.jobgo.presenter.job_info.JobSignedPresenter;
@@ -22,7 +22,7 @@ import java.util.List;
  * 查看我报名的工作
  */
 
-public class JobSignedActivity extends AppCompatActivity implements JobSignedContract.IJobSignedView {
+public class JobSignedActivity extends BaseActivity implements JobSignedContract.IJobSignedView {
     private boolean LoadingMore = false;        //判断是否正在加载
     public ListView mListView;
     public List<JobSignedInfo> mData;
@@ -34,21 +34,22 @@ public class JobSignedActivity extends AppCompatActivity implements JobSignedCon
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_signed);
         jobSignedPresenter = new JobSignedPresenter(this);
-        bindView();
         initJoblistArr();
         setRefreshLayout();
         setOnScrollListener();
     }
 
 
-    /**
-     * 绑定控件
-     */
-    public void bindView() {
+    @Override
+    protected void bindView() {
         mListView = this.findViewById(R.id.job_list);
         swpRefresh = this.findViewById(R.id.swipe_refresh_job_list);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_job_signed;
     }
 
 

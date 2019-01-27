@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.util.Validator;
 
 import cn.bingoogolapple.qrcode.core.QRCodeView;
@@ -17,16 +17,22 @@ import cn.bingoogolapple.qrcode.zxing.ZXingView;
  * Created by jim on 2018/4/10.
  */
 
-public class CaptureActivity extends AppCompatActivity {
+public class CaptureActivity extends BaseActivity {
     private QRCodeView mQRCodeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_capture);
+    }
 
+    @Override
+    protected void bindView() {
         mQRCodeView = (ZXingView) findViewById(R.id.zxingview);
+    }
 
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_capture;
     }
 
     @Override

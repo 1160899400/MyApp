@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.contract.user_auth.GetMsgContract;
 import com.liu.jim.jobgo.contract.user_auth.RegContract;
 import com.liu.jim.jobgo.entity.response.result.MessageResult;
@@ -27,7 +27,7 @@ import com.liu.jim.jobgo.util.Validator;
  * Created by jim on 2018/3/28.
  */
 
-public class RegActivity extends AppCompatActivity implements View.OnClickListener, GetMsgContract.IGetMsgView, RegContract.IRegView {
+public class RegActivity extends BaseActivity implements View.OnClickListener, GetMsgContract.IGetMsgView, RegContract.IRegView {
 
     private int smsId;
     private String phone;
@@ -44,21 +44,16 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
         timeCount = new TimeCount(60000, 1000);
         regPresenter = new RegPresenter(this);
         getMsgPresenter = new GetMsgPresenter(this);
-        bindView();
         setToolbar();
         ActivityManager actManager = ActivityManager.getActManager();
         actManager.addActivity("RegActivity", this);
     }
 
-
-    /**
-     * 绑定控件变量和资源id
-     */
-    public void bindView() {
+    @Override
+    protected void bindView() {
         mToolbar = findViewById(R.id.toolbar);
         et_phone = findViewById(R.id.et_phone);
         et_message = findViewById(R.id.et_message);
@@ -67,6 +62,11 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(this);
         et_pwd = findViewById(R.id.et_pwd);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_register;
     }
 
     public void setToolbar() {

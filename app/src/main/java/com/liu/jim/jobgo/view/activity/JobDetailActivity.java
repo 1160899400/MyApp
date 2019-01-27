@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,14 +13,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.liu.jim.jobgo.MyApplication;
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.constants.IntentConstants;
 import com.liu.jim.jobgo.constants.JobApplyStateConstants;
 import com.liu.jim.jobgo.contract.ApplyJobContract;
 import com.liu.jim.jobgo.contract.job_info.JobDetailContract;
+import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.db.model.Location;
 import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
-import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.ApplyJobPresenter;
@@ -32,7 +32,7 @@ import com.liu.jim.jobgo.util.ACache;
  * Created by jim on 2018/4/5.
  */
 
-public class JobDetailActivity extends AppCompatActivity implements View.OnClickListener, JobDetailContract.IJobDetailView, ApplyJobContract.IApplyJobView {
+public class JobDetailActivity extends BaseActivity implements View.OnClickListener, JobDetailContract.IJobDetailView, ApplyJobContract.IApplyJobView {
 
     private ImageView iv_jobType;
     private TextView tv_jobName;   //显示工作名
@@ -62,8 +62,6 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_detail);
-        bindView();
         jobDetailPresenter = new JobDetailPresenter(this);
         applyJobPresenter = new ApplyJobPresenter(this);
         initJobDetail();
@@ -91,10 +89,8 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
         jobDetailPresenter.getJobDetail(accountId, token, jobId);
     }
 
-    /**
-     * 绑定视图内的控件
-     */
-    private void bindView() {
+    @Override
+    protected void bindView() {
         tv_jobName = findViewById(R.id.tv_job_name);
         tv_jobState = findViewById(R.id.tv_job_state);
         tv_jobPlace = findViewById(R.id.tv_jobPlace);
@@ -108,6 +104,11 @@ public class JobDetailActivity extends AppCompatActivity implements View.OnClick
         tv_jobUrgent = findViewById(R.id.tv_job_urgent);
         tv_jobDesc = findViewById(R.id.tv_jobDesc);
         btn_operation = findViewById(R.id.btn_operation);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_job_detail;
     }
 
 

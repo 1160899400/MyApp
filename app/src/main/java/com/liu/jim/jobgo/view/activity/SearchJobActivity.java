@@ -5,12 +5,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.contract.job_info.JobDataByKwContract;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
 import com.liu.jim.jobgo.manager.ActivityManager;
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by jim on 2018/4/13.
  */
 
-public class SearchJobActivity extends AppCompatActivity implements JobDataByKwContract.IJobDataByKwView {
+public class SearchJobActivity extends BaseActivity implements JobDataByKwContract.IJobDataByKwView {
 
     private boolean LoadingMore = false;
     private SearchView mSearchView;
@@ -46,11 +46,9 @@ public class SearchJobActivity extends AppCompatActivity implements JobDataByKwC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_job);
         Intent intent = getIntent();
         SearchContent = intent.getStringExtra("SearchStr");
         jobDataByKwPresenter = new JobDataByKwPresenter(this);
-        bindView();
         reqJobByKw(SearchContent);
         initSearchView();
         initSwipeRefresh();
@@ -59,13 +57,19 @@ public class SearchJobActivity extends AppCompatActivity implements JobDataByKwC
         actManager.addActivity("SearchJobActivity", this);
     }
 
-    public void bindView() {
+    @Override
+    protected void bindView() {
         mSearchView = findViewById(R.id.search_view);
         mSearchView.setQueryHint(SearchContent);
         mListView = findViewById(R.id.job_list);
         swpRefresh = findViewById(R.id.swipe_refresh_job_list);
         jobAdapter = new JobAdapter(this, jobBasicInfoList);
         mListView.setAdapter(jobAdapter);
+    }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.activity_search_job;
     }
 
     /**
@@ -140,6 +144,7 @@ public class SearchJobActivity extends AppCompatActivity implements JobDataByKwC
                     swpRefresh.setRefreshing(true);
                     //模拟加载网络数据
                     new Handler().post(new Runnable() {
+                        @Override
                         public void run() {
                             jobAdapter.clearList();
                             SearchJobActivity.this.jobDataByKwPresenter.updateJobDataByKw(SearchContent);
