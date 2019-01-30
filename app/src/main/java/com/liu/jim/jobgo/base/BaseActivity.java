@@ -1,7 +1,10 @@
 package com.liu.jim.jobgo.base;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.liu.jim.jobgo.util.UIUtil;
 
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -14,6 +17,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected CompositeDisposable mCompositeDisposable;
 
+    /**
+     * 当前app是否在前台
+     */
+    private boolean inFront;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +28,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getResourceId());
         bindView();
         mCompositeDisposable = new CompositeDisposable();
+    }
+
+
+    @Override
+    protected void onResume() {
+        inFront = true;
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        inFront = false;
+        super.onPause();
     }
 
     /**
@@ -41,6 +61,15 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     /**
+     * 调整pt到px的转换(通过设置dpi的值)完成屏幕的适配
+     * @return
+     */
+//    @Override
+//    public Resources getResources(){
+//        return UIUtil.setScreenDpi(super.getResources());
+//    }
+
+    /**
      *
      */
     @Override
@@ -49,6 +78,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (null != mCompositeDisposable){
             mCompositeDisposable.dispose();
         }
+    }
+
+    public boolean isInFront() {
+        return inFront;
     }
 
 }
