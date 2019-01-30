@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseFragment;
 import com.liu.jim.jobgo.contract.job_info.JobDataHiringContract;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
 import com.liu.jim.jobgo.manager.NoticeManager;
@@ -28,10 +28,8 @@ import java.util.List;
  * Created by jim on 2018/3/6.
  */
 
-public class JobHiringFragment extends Fragment implements JobDataHiringContract.IJobDataHirView {
+public class JobHiringFragment extends BaseFragment implements JobDataHiringContract.IJobDataHirView {
 
-
-    public View mView;
     public ListView mListView;
     public List<JobBasicInfo> mData;
     public SwipeRefreshLayout swpRefresh;
@@ -45,28 +43,29 @@ public class JobHiringFragment extends Fragment implements JobDataHiringContract
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mView = getActivity().getLayoutInflater().inflate(R.layout.fg_job_hiring, null, false);
         this.jobDataHirPresenter = new JobDataHirPresenter(this);
-        bindView();
-        initJobListArr();
-        initSearchView();
-        initRefreshLayout();
-        setOnScrollListener();
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return this.mView;
+        super.onCreateView(inflater, container, savedInstanceState);
+        initSearchView();
+        initRefreshLayout();
+        initJobListArr();
+        return mContentView;
     }
 
-    /**
-     * 绑定控件
-     */
+    @Override
+    protected int getResourceId() {
+        return R.layout.fg_job_hiring;
+    }
+
+    @Override
     public void bindView() {
-        mListView = mView.findViewById(R.id.job_list);
-        swpRefresh = mView.findViewById(R.id.swipe_refresh_job_list);
-        mSearchView = this.mView.findViewById(R.id.search_view);
+        mListView = mContentView.findViewById(R.id.job_list);
+        swpRefresh = mContentView.findViewById(R.id.swipe_refresh_job_list);
+        mSearchView = mContentView.findViewById(R.id.search_view);
     }
 
     /**
@@ -82,6 +81,7 @@ public class JobHiringFragment extends Fragment implements JobDataHiringContract
                 startActivity(intent);
                 return true;
             }
+
             // 当搜索内容改变时触发该方法
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -115,6 +115,7 @@ public class JobHiringFragment extends Fragment implements JobDataHiringContract
                     swpRefresh.setRefreshing(true);
                     //模拟加载网络数据
                     new Handler().post(new Runnable() {
+                        @Override
                         public void run() {
                             updateJobList();
                         }
@@ -167,11 +168,10 @@ public class JobHiringFragment extends Fragment implements JobDataHiringContract
     }
 
 
-
     @Override
     public void showJobDataHir(List<JobBasicInfo> jobBasicInfoList) {
         jobAdapter.addListFromBottom(jobBasicInfoList);
-        if (swpRefresh.isRefreshing()){
+        if (swpRefresh.isRefreshing()) {
             swpRefresh.setRefreshing(false);
         }
         NoticeManager.build(JobHiringFragment.this.getActivity()).loadSuccess();

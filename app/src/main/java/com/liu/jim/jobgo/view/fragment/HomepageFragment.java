@@ -1,12 +1,17 @@
 package com.liu.jim.jobgo.view.fragment;
 
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,29 +25,33 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.liu.jim.ILocationManager;
 import com.liu.jim.jobgo.R;
+import com.liu.jim.jobgo.base.BaseFragment;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataByDisContract;
+import com.liu.jim.jobgo.db.model.Location;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
-import com.liu.jim.jobgo.manager.LocationManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.job_info.JobDataByDisPresenter;
 import com.liu.jim.jobgo.view.adapter.list_view_adapter.JobDisAdapter;
+import com.liu.jim.locator.ILocationListener;
+import com.liu.jim.locator.LocationService;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 /**
  * Created by jim on 2018/3/6.
  */
 
-public class HomepageFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener, JobDataByDisContract.IJobDataByDisView {
-
+public class HomepageFragment extends BaseFragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener, JobDataByDisContract.IJobDataByDisView {
+    private static final String TAG = "HomepageFragment";
     private JobDataByDisPresenter jobDataByDisPresenter;
     private boolean LoadingMore = false;
-    private View mView;
     private View mBannerView;
     private SliderLayout mBanner;
     public ListView mListView;
@@ -51,66 +60,115 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
 
     public Context context;
     private JobDisAdapter jobDisAdapter;
-    private Button btn_locate;
-    private TextView tv_address;
+    private TextView tvLocation;
+
+    private boolean boundLocationService;
 
 
     public HomepageFragment() {
 
     }
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //初始化数据和视图
-        context = this.getActivity();
-        this.mView = getActivity().getLayoutInflater().inflate(R.layout.fg_homepage, null, false);
         jobDataByDisPresenter = new JobDataByDisPresenter(this);
-        LocationManager.getLocationManager().getPostition(this.getActivity());
-        bindView();
-        initBanner();
-        mListView.addHeaderView(mBannerView);
-        initJoblistArr();
-        initSwipeRefresh();
-        setOnScrollListener();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if (AppConstants.address == null) {
-            tv_address.setText("当前位置:未知");
-        } else {
-            tv_address.setText("当前位置:" + AppConstants.address);
-        }
-        return this.mView;
+        super.onCreateView(inflater, container, savedInstanceState);
+        initBanner();
+        initJobList();
+        initSwipeRefresh();
+        setOnScrollListener();
+        mListView.addHeaderView(mBannerView);
+        initLocation();
+        return mContentView;
     }
+
+    @Override
+    protected int getResourceId() {
+        return R.layout.fg_homepage;
+    }
+
+
+    @Override
+    public void bindView() {
+        mListView = mContentView.findViewById(R.id.job_list);
+        mBannerView = LayoutInflater.from(mActivity).inflate(R.layout.view_banner, null, false);
+        mBanner = mBannerView.findViewById(R.id.slider);
+        swpRefresh = mContentView.findViewById(R.id.swipe_refresh_job_list);
+        tvLocation = mContentView.findViewById(R.id.tv_Location_address);
+        Button btnLocate = mContentView.findViewById(R.id.btn_locate);
+        btnLocate.setOnClickListener(this);
+    }
+
+
+    private ServiceConnection locationServiceConnection = new ServiceConnection() {
+        private ILocationManager mILocationManager;
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mILocationManager = ILocationManager.Stub.asInterface(service);
+            try {
+                mILocationManager.registerListener(new ILocationListener.Stub() {
+                    @Override
+                    public void onReturnLocation(Location location) throws RemoteException {
+                        Log.i(TAG,"on return location: " + location.getProvince() + location.getCity() + location.getDistrict());
+                        if (null != tvLocation && null != location) {
+                            Log.i(TAG,"get location: " + location.getProvince() + location.getCity() + location.getDistrict());
+                            tvLocation.setText(location.getProvince() + location.getCity() + location.getDistrict());
+                            //获取到后立刻解除service绑定
+                            HomepageFragment.this.mActivity.unbindService(locationServiceConnection);
+                        }
+                    }
+                });
+                mILocationManager.getLocation();
+                Log.i(TAG,"location service connected ");
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            boundLocationService = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            try {
+                mILocationManager.unregisterListener();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+            boundLocationService = false;
+        }
+    };
 
 
     /**
-     * 绑定控件
+     * 初始化用户地理位置信息 (连接service，连接后立刻获取)
      */
-    public void bindView() {
-        mListView = this.mView.findViewById(R.id.job_list);
-        mBannerView = LayoutInflater.from(this.getActivity()).inflate(R.layout.view_banner, null, false);
-        mBanner = mBannerView.findViewById(R.id.slider);
-        swpRefresh = this.mView.findViewById(R.id.swipe_refresh_job_list);
-        tv_address = this.mView.findViewById(R.id.tv_Location_address);
-        btn_locate = this.mView.findViewById(R.id.btn_locate);
-        btn_locate.setOnClickListener(this);
+    private void initLocation() {
+        if (!boundLocationService) {
+            Intent intent = new Intent(mContext, LocationService.class);
+            mActivity.bindService(intent, locationServiceConnection, Context.BIND_AUTO_CREATE);
+        }
     }
+
 
     /**
      * 初始化轮播控件
      */
     private void initBanner() {
-        HashMap<String, Integer> url_maps = new HashMap<String, Integer>();
-        url_maps.put("平台推广", R.drawable.slider_view1);
-        url_maps.put("义工旅行", R.drawable.slider_view2);
-        url_maps.put("云地推服务", R.drawable.slider_view3);
-        for (String name : url_maps.keySet()) {
+        HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
+        urlMap.put("平台推广", R.drawable.slider_view1);
+        urlMap.put("义工旅行", R.drawable.slider_view2);
+        urlMap.put("云地推服务", R.drawable.slider_view3);
+        for (String name : urlMap.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this.getActivity());
             textSliderView
                     .description(name)
-                    .image(url_maps.get(name))
+                    .image(urlMap.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
             mBanner.setPresetTransformer(SliderLayout.Transformer.Accordion);
@@ -146,10 +204,7 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_locate) {
-            LocationManager.getLocationManager().stopLocation();
-            LocationManager.getLocationManager().getPostition(this.getActivity());
-            tv_address.setText("当前位置:" + AppConstants.address);
-            updateJobList();
+
         }
     }
 
@@ -171,6 +226,7 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
                     swpRefresh.setRefreshing(true);
                     //模拟加载网络数据
                     new Handler().post(new Runnable() {
+                        @Override
                         public void run() {
                             updateJobList();
                         }
@@ -194,8 +250,11 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
                             HomepageFragment.this.requestJobList();
                         }
                         break;
+                    default:
+                        break;
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
@@ -207,7 +266,7 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
     /**
      * 初始化job数据，从缓存读取或请求网络
      */
-    private void initJoblistArr() {
+    private void initJobList() {
         mData = new LinkedList<>();
         this.jobDisAdapter = new JobDisAdapter(getActivity(), mData);
         this.mListView.setAdapter(jobDisAdapter);
@@ -247,9 +306,13 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
     }
 
 
-    /**
-     * 通知回收Presenter,防止内存泄漏
-     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mListView.removeHeaderView(mBannerView);
+    }
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -258,5 +321,9 @@ public class HomepageFragment extends Fragment implements BaseSliderView.OnSlide
             jobDataByDisPresenter = null;
             System.gc();
         }
+        if (boundLocationService) {
+            mActivity.unbindService(locationServiceConnection);
+        }
+
     }
 }
