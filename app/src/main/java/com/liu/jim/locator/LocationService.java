@@ -6,6 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -19,12 +20,13 @@ import com.liu.jim.jobgo.db.model.Location;
  * @date 2018/12/10
  */
 public class LocationService extends Service {
+    private static final String TAG = "LocationService";
 
     private LocationClient locationClient;
 
     private static Location location;
 
-    private LocationListener mLocationListener;
+    private ILocationListener mLocationListener;
 
     /**
      * 传出返回的定位结果
@@ -34,12 +36,14 @@ public class LocationService extends Service {
     private final Binder mBinder = new ILocationManager.Stub() {
 
         @Override
-        public void registerListener(LocationListener locationListener) throws RemoteException {
+        public void registerListener(ILocationListener locationListener) throws RemoteException {
+            Log.i(TAG,"register listener");
             mLocationListener = locationListener;
         }
 
         @Override
         public void getLocation() throws RemoteException {
+            Log.i(TAG,"start locate");
             locationClient.start();
         }
 
@@ -53,6 +57,7 @@ public class LocationService extends Service {
     public void onCreate() {
         location = new Location();
         initLocationClient();
+        Log.i(TAG,"init location client");
     }
 
     private void initLocationClient() {
@@ -75,7 +80,7 @@ public class LocationService extends Service {
         //bd09：百度墨卡托坐标；
         //海外地区定位，无需设置坐标类型，统一返回wgs84类型坐标
 
-        option.setScanSpan(0);
+        option.setScanSpan(2000);
         //可选，设置发起定位请求的间隔，int类型，单位ms
         //如果设置为0，则代表单次定位，即仅定位一次，默认为0
         //如果设置非0，需设置1000ms以上才有效
@@ -118,6 +123,7 @@ public class LocationService extends Service {
     class MyLocationListener extends BDAbstractLocationListener {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
+            Log.i(TAG,"service receive location");
             try {
                 location.setLongitude(bdLocation.getLongitude());
                 location.setLatitude(bdLocation.getLatitude());
