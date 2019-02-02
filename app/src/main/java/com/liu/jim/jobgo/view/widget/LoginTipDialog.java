@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.view.activity.LoginActivity;
 
 /**
@@ -36,8 +36,8 @@ public class LoginTipDialog extends TipDialog {
         super.setOnYesClickListener(new onYesOnclickListener() {
             @Override
             public void onYesClick() {
-                Intent intent = new Intent(MyApplication.getContext(),LoginActivity.class);
-                MyApplication.getContext().startActivity(intent);
+                Intent intent = new Intent(JobGoApplication.getContext(),LoginActivity.class);
+                JobGoApplication.getContext().startActivity(intent);
                 LoginTipDialog.this.dismiss();
             }
         });

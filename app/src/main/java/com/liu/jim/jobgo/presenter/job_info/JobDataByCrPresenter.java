@@ -3,7 +3,7 @@ package com.liu.jim.jobgo.presenter.job_info;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.contract.job_info.JobDataByCrContract;
 import com.liu.jim.jobgo.entity.response.bean.Area;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
@@ -38,13 +38,13 @@ public class JobDataByCrPresenter implements JobDataByCrContract.IJobDataByCrPre
                 List<JobBasicInfo> jbi;
                 if (jobListResult == null || jobListResult.getData() == null || jobListResult.getData().getData() == null) {
                     mIJobDataByCrView.showJobDataByCr(null);
-                    Toast.makeText(MyApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JobGoApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
                 } else {
                     hasNext = jobListResult.getData().getData().isHasNext();
                     Log.i("###hasNext","" + hasNext + " " +jobListResult.getData().getData().getTotal());
                     jbi = jobListResult.getData().getData().getJobData();
                     if (jbi.size() == 0) {       //数据大小为空，则从缓存获取
-                        Toast.makeText(MyApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JobGoApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
                     }
                     page ++;
                     mIJobDataByCrView.showJobDataByCr(jbi);
@@ -53,7 +53,7 @@ public class JobDataByCrPresenter implements JobDataByCrContract.IJobDataByCrPre
 
             @Override
             public void onFail(String errorMsg) {
-                Toast.makeText(MyApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobGoApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
                 mIJobDataByCrView.showJobDataByCr(null);
                 Log.i("###jobcr req", errorMsg);
             }
@@ -72,19 +72,19 @@ public class JobDataByCrPresenter implements JobDataByCrContract.IJobDataByCrPre
                 List<JobBasicInfo> jbi;
                 if (jobListResult == null || jobListResult.getData() == null || jobListResult.getData().getData() == null) {
                     mIJobDataByCrView.showJobDataByCr(null);
-                    Toast.makeText(MyApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JobGoApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
                 } else {
                     jbi = jobListResult.getData().getData().getJobData();
                     hasNext = jobListResult.getData().getData().isHasNext();
                     if (jbi.size() == 0) {
-                        Toast.makeText(MyApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JobGoApplication.getContext(), "没有符合要求的职位~", Toast.LENGTH_SHORT).show();
                     }
                     mIJobDataByCrView.showJobDataByCr(jbi);
                 }
             }
             @Override
             public void onFail(String errorMsg) {
-                Toast.makeText(MyApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobGoApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
                 mIJobDataByCrView.showJobDataByCr(null);
                 Log.i("###jobcr req", errorMsg);
             }
@@ -100,12 +100,12 @@ public class JobDataByCrPresenter implements JobDataByCrContract.IJobDataByCrPre
                     List<JobBasicInfo> jbi;
                     if (jobListResult == null || jobListResult.getData() == null || jobListResult.getData().getData() == null) {
                         mIJobDataByCrView.showJobDataByCr(null);
-                        Toast.makeText(MyApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(JobGoApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
                     } else {
                         hasNext = jobListResult.getData().getData().isHasNext();
                         jbi = jobListResult.getData().getData().getJobData();
                         if (jbi.size() == 0) {       //数据大小为空，则从缓存获取
-                            Toast.makeText(MyApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(JobGoApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
                         }
                         page ++;
                         mIJobDataByCrView.showJobDataByCr(jbi);
@@ -113,13 +113,13 @@ public class JobDataByCrPresenter implements JobDataByCrContract.IJobDataByCrPre
                 }
                 @Override
                 public void onFail(String errorMsg) {
-                    Toast.makeText(MyApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JobGoApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
                     mIJobDataByCrView.showJobDataByCr(null);
                 }
             }, jobTypes, area, screen, page);
         }else {
             mIJobDataByCrView.showJobDataByCr(null);
-            Toast.makeText(MyApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobGoApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
         }
     }
 

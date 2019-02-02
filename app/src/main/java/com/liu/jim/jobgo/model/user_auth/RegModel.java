@@ -65,7 +65,7 @@ public class RegModel implements RegContract.IRegModel {
         registerRequest.setAccountPassword(pwd);
         registerRequest.setSmsId(smsId);
         registerRequest.setCode(message);
-        registerRequest.setVersion(AppConstants.version);
+        registerRequest.setVersion(AppConstants.VERSION);
         return registerRequest;
     }
 }

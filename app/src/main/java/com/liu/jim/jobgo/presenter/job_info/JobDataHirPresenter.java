@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataHiringContract;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
@@ -37,7 +37,7 @@ public class JobDataHirPresenter implements JobDataHiringContract.IJobDataHirPre
             public void onSuccess(JobListResult jobListResult) {
                 if (jobListResult == null || jobListResult.getData() == null || jobListResult.getData() == null){
                     mIJobDataHirView.showJobDataHir(readJobHirFromCache());
-                    Toast.makeText(MyApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JobGoApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
                 }else {
                     mIJobDataHirView.showJobDataHir(jobListResult.getData().getData().getJobData());
                     writeJobHirToCache(jobListResult.getData().getData().getJobData());
@@ -47,7 +47,7 @@ public class JobDataHirPresenter implements JobDataHiringContract.IJobDataHirPre
             @Override
             public void onFail(String errorMsg) {
                 mIJobDataHirView.showJobDataHir(readJobHirFromCache());
-                Toast.makeText(MyApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobGoApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -64,7 +64,7 @@ public class JobDataHirPresenter implements JobDataHiringContract.IJobDataHirPre
      */
     @Nullable
     private List<JobBasicInfo> readJobHirFromCache() {
-        ACache aCache = ACache.get(MyApplication.getContext(), CacheConstants.DIR_JOB_LIST_HIRING);
+        ACache aCache = ACache.get(JobGoApplication.getContext(), CacheConstants.DIR_JOB_LIST_HIRING);
         String jobListStr = aCache.getAsString(CacheConstants.JOB_LIST_HIRING);
         LinkedList<JobBasicInfo> newJobLs = new Gson().fromJson(jobListStr, new TypeToken<LinkedList<JobBasicInfo>>() {
         }.getType());

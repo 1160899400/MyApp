@@ -17,6 +17,9 @@ public class Account {
     @Id(assignable = true)
     private Long id;
 
+    /**
+     * 0为未知，1为男，-1为女
+     */
     private Byte gender;
 
     private int contrary;

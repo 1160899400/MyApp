@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.R;
 import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.CacheConstants;
@@ -75,7 +75,7 @@ public class JobDetailActivity extends BaseActivity implements View.OnClickListe
         NoticeManager.build(this).show();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        ACache aCache = ACache.get(MyApplication.getContext());
+        ACache aCache = ACache.get(JobGoApplication.getContext());
         token = aCache.getAsString(CacheConstants.LOGIN_TOKEN);
         String pistr = aCache.getAsString(CacheConstants.PERSONAL_INFO);
         if (pistr != null) {

@@ -1,8 +1,11 @@
 package com.liu.jim.jobgo.base;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
 import io.reactivex.disposables.CompositeDisposable;
 
 
@@ -10,7 +13,9 @@ import io.reactivex.disposables.CompositeDisposable;
  * @author Jim.Liu
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements LifecycleOwner {
+
+    protected LifecycleRegistry mLifecycleRegistry;
 
     protected CompositeDisposable mCompositeDisposable;
 
@@ -22,22 +27,38 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLifecycleRegistry = new LifecycleRegistry(this);
         setContentView(getResourceId());
         bindView();
         mCompositeDisposable = new CompositeDisposable();
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
     }
 
 
     @Override
     protected void onResume() {
-        inFront = true;
         super.onResume();
+        inFront = true;
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
     }
 
     @Override
     protected void onPause() {
-        inFront = false;
         super.onPause();
+        inFront = false;
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
     }
 
     /**
@@ -47,6 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 返回当前ContentView的布局id
+     *
      * @return
      */
     protected abstract int getResourceId();
@@ -70,11 +92,12 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      */
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
-        if (null != mCompositeDisposable){
+        if (null != mCompositeDisposable) {
             mCompositeDisposable.dispose();
         }
+        mLifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
     }
 
     public boolean isInFront() {

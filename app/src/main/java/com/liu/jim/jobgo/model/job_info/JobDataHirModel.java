@@ -3,7 +3,7 @@ package com.liu.jim.jobgo.model.job_info;
 import android.util.Log;
 
 import com.google.gson.GsonBuilder;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.contract.job_info.JobDataHiringContract;
 import com.liu.jim.jobgo.entity.request.JobHiringRequest;
 import com.liu.jim.jobgo.entity.response.result.JobListResult;
@@ -58,9 +58,9 @@ public class JobDataHirModel implements JobDataHiringContract.IJobDataHirModel {
 
     private JobHiringRequest initJobHirReq(int page) {
         JobHiringRequest jobHiringRequest = new JobHiringRequest();
-        jobHiringRequest.setToken(CacheManager.getCacheManager().getToken(MyApplication.getContext()));
+        jobHiringRequest.setToken(CacheManager.getCacheManager().getToken(JobGoApplication.getContext()));
         jobHiringRequest.setJobState(2);
-        jobHiringRequest.setAccountId(CacheManager.getCacheManager().getAccountId(MyApplication.getContext()));
+        jobHiringRequest.setAccountId(CacheManager.getCacheManager().getAccountId(JobGoApplication.getContext()));
         jobHiringRequest.setPage(page);
         return jobHiringRequest;
     }

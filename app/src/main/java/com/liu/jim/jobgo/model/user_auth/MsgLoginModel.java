@@ -61,12 +61,12 @@ public class MsgLoginModel implements MsgLoginContract.IMsgLoginModel {
         messageLoginRequest.setAccountPhone(phone);
         messageLoginRequest.setCode(msg);
         messageLoginRequest.setSmsId(smsId);
-        messageLoginRequest.setHost(AppConstants.host);
+        messageLoginRequest.setHost(AppConstants.HOST);
         messageLoginRequest.setLatitude(AppConstants.position.getLat());
         messageLoginRequest.setLongitude(AppConstants.position.getLon());
-        messageLoginRequest.setDriverType(AppConstants.driverType);
-        messageLoginRequest.setDriverId(AppConstants.driverId);
-        messageLoginRequest.setVersion(AppConstants.version);
+        messageLoginRequest.setDriverType(AppConstants.DRIVER_TYPE);
+        messageLoginRequest.setDriverId(AppConstants.DRIVER_ID);
+        messageLoginRequest.setVersion(AppConstants.VERSION);
         return messageLoginRequest;
     }
 

@@ -3,7 +3,7 @@ package com.liu.jim.jobgo.model.job_info;
 import android.util.Log;
 
 import com.google.gson.GsonBuilder;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataByKwContract;
 import com.liu.jim.jobgo.entity.request.JobKeywordRequest;
@@ -60,8 +60,8 @@ public class JobDataByKwModel implements JobDataByKwContract.IJobDataByKwModel {
     private JobKeywordRequest initJobKwReq(String keyword){
         JobKeywordRequest jkwr = new JobKeywordRequest();
         CacheManager cm = CacheManager.getCacheManager();
-        int accountId = cm.getAccountId(MyApplication.getContext());
-        String token = cm.getToken(MyApplication.getContext());
+        int accountId = cm.getAccountId(JobGoApplication.getContext());
+        String token = cm.getToken(JobGoApplication.getContext());
         cm = null;
         jkwr.setKeywords(keyword);
         jkwr.setAccountId(accountId);

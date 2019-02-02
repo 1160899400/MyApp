@@ -1,7 +1,7 @@
 package com.liu.jim.jobgo.model.job_info;
 
 import com.google.gson.GsonBuilder;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.contract.job_info.JobSignedContract;
 import com.liu.jim.jobgo.entity.request.JobSignedRequest;
 import com.liu.jim.jobgo.entity.response.result.JobSignedResult;
@@ -64,8 +64,8 @@ public class JobSignedModel implements JobSignedContract.IJobSignedModel {
     private JobSignedRequest initJobSignedReq() {
         JobSignedRequest jobSignedRequest = new JobSignedRequest();
         CacheManager cm = CacheManager.getCacheManager();
-        jobSignedRequest.setAccountId(cm.getAccountId(MyApplication.getContext()));
-        jobSignedRequest.setToken(cm.getToken(MyApplication.getContext()));
+        jobSignedRequest.setAccountId(cm.getAccountId(JobGoApplication.getContext()));
+        jobSignedRequest.setToken(cm.getToken(JobGoApplication.getContext()));
         cm = null;
         return jobSignedRequest;
     }

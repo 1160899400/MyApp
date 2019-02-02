@@ -44,6 +44,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 def dependency_versions = rootProject.ext.versions

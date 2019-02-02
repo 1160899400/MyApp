@@ -62,12 +62,12 @@ public class PwdLoginModel implements PwdLoginContract.IPwdLoginModel {
         pwdLoginRequest.setAccountName(phone);
         String encodedPwd = EncryptUtil.Companion.encryptPassword(password);    //对密码进行加密
         pwdLoginRequest.setAccountPasswd(encodedPwd);
-        pwdLoginRequest.setHost(AppConstants.host);
+        pwdLoginRequest.setHost(AppConstants.HOST);
         pwdLoginRequest.setLatitude(AppConstants.position.getLat());
         pwdLoginRequest.setLongitude(AppConstants.position.getLon());
-        pwdLoginRequest.setDriverType(AppConstants.driverType);
-        pwdLoginRequest.setDriverId(AppConstants.driverId);
-        pwdLoginRequest.setVersion(AppConstants.version);
+        pwdLoginRequest.setDriverType(AppConstants.DRIVER_TYPE);
+        pwdLoginRequest.setDriverId(AppConstants.DRIVER_ID);
+        pwdLoginRequest.setVersion(AppConstants.VERSION);
         return pwdLoginRequest;
     }
 }

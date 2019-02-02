@@ -3,7 +3,7 @@ package com.liu.jim.jobgo.presenter.user_auth;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.user_auth.PwdLoginContract;
@@ -39,7 +39,7 @@ public class PwdLoginPresenter implements PwdLoginContract.IPwdLoginPresenter {
             }
             @Override
             public void onFail(String errorMsg) {
-                Toast.makeText(MyApplication.getContext(),errorMsg,Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobGoApplication.getContext(),errorMsg,Toast.LENGTH_SHORT).show();
                 anlLoginResult(null);
             }
         });
@@ -57,12 +57,12 @@ public class PwdLoginPresenter implements PwdLoginContract.IPwdLoginPresenter {
             if (resultCode == 1) {
                 String token = loginResult.getToken();
                 LoginPersonalInfo lpi = loginResult.getData().getData();
-                ACache aCache = ACache.get(MyApplication.getContext());
+                ACache aCache = ACache.get(JobGoApplication.getContext());
                 if (token != null && lpi != null) {     //写入缓存
                     aCache.put(CacheConstants.LOGIN_TOKEN, token);
                     CacheManager.getCacheManager().putPersonalInfo(lpi);
                 }
-                AppConstants.loginStatus = true;            //更改全局登录状态
+                AppConstants.LOGIN_STATUS = true;            //更改全局登录状态
             }
             mIPwdLoginView.showLoginResult(resultCode);
         }

@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataByDisContract;
@@ -59,7 +59,7 @@ public class JobDataByDisPresenter implements JobDataByDisContract.IJobDataByDis
 
             @Override
             public void onFail(String errorMsg) {
-                Toast.makeText(MyApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobGoApplication.getContext(), "请检查网络设置后重试", Toast.LENGTH_SHORT).show();
                 Log.i("###job dis", "解析问题2");
                 List<JobBasicInfo> jbi = readJobDisFromCache();
                 mIJobDataByDisView.showJobDataByDis(jbi);
@@ -85,7 +85,7 @@ public class JobDataByDisPresenter implements JobDataByDisContract.IJobDataByDis
      */
     @Nullable
     private List<JobBasicInfo> readJobDisFromCache() {
-        ACache aCache = ACache.get(MyApplication.getContext(), CacheConstants.DIR_JOB_LIST_DIS);
+        ACache aCache = ACache.get(JobGoApplication.getContext(), CacheConstants.DIR_JOB_LIST_DIS);
         String jobListStr = aCache.getAsString(CacheConstants.JOB_LIST_DIS);
         LinkedList<JobBasicInfo> newJobLs = new Gson().fromJson(jobListStr, new TypeToken<LinkedList<JobBasicInfo>>() {
         }.getType());

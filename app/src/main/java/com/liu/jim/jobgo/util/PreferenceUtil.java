@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.collection.SimpleArrayMap;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 
 import java.util.Collections;
 import java.util.Map;
@@ -23,7 +23,7 @@ public final class PreferenceUtil {
     private SharedPreferences sp;
 
     public static SharedPreferences getPreferences() {
-        return MyApplication.getContext().getSharedPreferences(DEFAULT_NAME, Context.MODE_PRIVATE);
+        return JobGoApplication.getContext().getSharedPreferences(DEFAULT_NAME, Context.MODE_PRIVATE);
     }
 
     /**
@@ -59,7 +59,7 @@ public final class PreferenceUtil {
     }
 
     private PreferenceUtil(final String spName) {
-        sp = MyApplication.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
+        sp = JobGoApplication.getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
     }
 
     /**

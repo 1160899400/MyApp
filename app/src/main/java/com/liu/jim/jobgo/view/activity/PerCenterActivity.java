@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LifecycleOwner;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -27,8 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.R;
 import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.AppConstants;
@@ -39,6 +40,7 @@ import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.ModInfoPresenter;
 import com.liu.jim.jobgo.util.BitmapUtil;
+import com.liu.jim.jobgo.util.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,21 +51,11 @@ import java.util.Date;
  * Created by jim on 2018/4/4.
  */
 
-public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClickListener, ModifyInfoContract.IModInfoView {
+public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClickListener {
 
     private Toolbar mToolbar;
 
-    private int accountId;
-    private String phone;
-    private String nickname;
-    private String realname;
-    private String email;
-    private String govid;
-    private String intr;
-    private String photolink;
-    private byte gender;
-    private String birth;
-    private Integer edu;
+    private Account account;
 
     private final int REQ_MOD_NICKNAME = 2;
     private final int REQ_MOD_NAME = 3;
@@ -94,7 +86,6 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
 
     private Bitmap avatar;
 
-    private ModifyInfoContract.IModInfoPresenter modInfoPresenter;
 
 
     @Override
@@ -103,45 +94,29 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
         setToolbar();
         initPersonalInfo();
         showInfo();
-        modInfoPresenter = new ModInfoPresenter(this);
         ActivityManager actManager = ActivityManager.getActManager();
         actManager.addActivity("PerCenterActivity", this);
     }
 
 
     /**
-     * 从缓存中读取个人信息
+     * 读取个人信息 (本地数据库中读取)
      */
     public void initPersonalInfo() {
         NoticeManager.build(this).setNoticeType(NoticeManager.NoticeType.Loading);      //显示加载框
-        NoticeManager.build(this).show();
-        String personalInfo = ACache.get(this).getAsString(CacheConstants.PERSONAL_INFO);
-        if (personalInfo != null) {
-            ModifyInfoRequest myInfo = new Gson().fromJson(personalInfo, ModifyInfoRequest.class);
-            accountId = myInfo.getAccountId();
-            email = myInfo.getAccount().getAccountEmail();
-            realname = myInfo.getAccount().getAppRealname();
-            govid = myInfo.getAccount().getAppGovid();
-            intr = myInfo.getAccount().getAppDescript();
-            photolink = myInfo.getAccount().getAppPhotolink();
-            gender = myInfo.getAccount().getAppGender();
-            birth = myInfo.getAccount().getAppBirth();
-            edu = myInfo.getAccount().getAppEdu();
-            phone = CacheManager.getCacheManager().getAccountPhone();
-            avatar = CacheManager.getCacheManager().getAvatar(MyApplication.getContext());
-        }
+
     }
 
     /**
      * 将内存的个人信息展示到控件外观上
      */
     private void showInfo() {
-        if (null == realname) { //姓名
+        if (TextUtils.isEmpty(account.getRealName())) {
             tv_name.setText("未填写");
         } else {
-            tv_name.setText(realname);
+            tv_name.setText(account.getRealName());
         }
-        if (1 == gender) { //性别
+        if (1 == gender) {
             tv_gender.setText("男");
         } else if (-1 == gender) {
             tv_gender.setText("女");
@@ -220,7 +195,6 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
     @Override
     protected void bindView() {
         mToolbar = findViewById(R.id.toolbar);
-
         iv_avatar = findViewById(R.id.image_avatar);
         tv_gender = findViewById(R.id.tv_gender);
         tv_birth = findViewById(R.id.tv_birth);
@@ -230,7 +204,6 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
         tv_govid = findViewById(R.id.tv_govid);
         tv_phone = findViewById(R.id.tv_phone);
         tv_introduction = findViewById(R.id.tv_introduction);
-
     }
 
     @Override
@@ -735,16 +708,11 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
     @Override
     public void modFail(int reqType) {
         NoticeManager.build(this).loadFail();
-        Toast.makeText(MyApplication.getContext(),"修改失败，请检查网络设置",Toast.LENGTH_SHORT).show();
+        Toast.makeText(JobGoApplication.getContext(),"修改失败，请检查网络设置",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (modInfoPresenter != null) {
-            modInfoPresenter.onDestroy();
-            modInfoPresenter = null;
-            System.gc();
-        }
     }
 }

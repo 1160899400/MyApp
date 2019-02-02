@@ -9,10 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class MessageLoginRequest {
 
-    @SerializedName("driverId")
+    @SerializedName("DRIVER_ID")
     @Expose
     private String driverId;
-    @SerializedName("driverType")
+    @SerializedName("DRIVER_TYPE")
     @Expose
     private String driverType;
     @SerializedName("longitude")
@@ -21,7 +21,7 @@ public class MessageLoginRequest {
     @SerializedName("latitude")
     @Expose
     private double latitude;
-    @SerializedName("host")
+    @SerializedName("HOST")
     @Expose
     private String host;
     @SerializedName("accountPhone")

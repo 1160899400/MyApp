@@ -2,7 +2,7 @@ package com.liu.jim.jobgo.presenter.job_info;
 
 import android.widget.Toast;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.contract.job_info.JobSignedContract;
 import com.liu.jim.jobgo.entity.response.bean.JobSignedInfo;
 import com.liu.jim.jobgo.entity.response.result.JobSignedResult;
@@ -39,9 +39,9 @@ public class JobSignedPresenter implements JobSignedContract.IJobSignedPresenter
                         List<JobSignedInfo> jobSignedInfoList = jobSignedResult.getData().getData().getRows();
                         if (jobSignedInfoList.size() <= 0) {
                             if (page == 0) {
-                                Toast.makeText(MyApplication.getContext(), "你还没有报名任何兼职~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(JobGoApplication.getContext(), "你还没有报名任何兼职~", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(MyApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(JobGoApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
                             }
                             mIJobSignedView.showJobSigned(null);
                         } else {
@@ -64,7 +64,7 @@ public class JobSignedPresenter implements JobSignedContract.IJobSignedPresenter
                 }
             });
         } else {
-            Toast.makeText(MyApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobGoApplication.getContext(), "没有更多了~", Toast.LENGTH_SHORT).show();
             mIJobSignedView.showJobSigned(null);
         }
     }

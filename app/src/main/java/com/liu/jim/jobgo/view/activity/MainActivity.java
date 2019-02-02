@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.R;
 import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.AppConstants;
@@ -100,9 +100,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         ACache aCache = ACache.get(this);
         String Token = aCache.getAsString(CacheConstants.LOGIN_TOKEN);
         if (Token == null) {
-            AppConstants.loginStatus = false;
+            AppConstants.LOGIN_STATUS = false;
         } else {
-            AppConstants.loginStatus = true;
+            AppConstants.LOGIN_STATUS = true;
         }
     }
 
@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         Bitmap avatar = CacheManager.getCacheManager().getAvatar(this);
         String name = CacheManager.getCacheManager().getAccountName();
         String email = CacheManager.getCacheManager().getAccountEmail();
-        if (AppConstants.loginStatus) {
+        if (AppConstants.LOGIN_STATUS) {
             if (avatar != null) {
                 mAvadar.setImageBitmap(avatar);
             } else {
@@ -179,7 +179,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                         viewPager.setCurrentItem(0);
                         break;
                     case R.id.nav_personal_center:
-                        if (!AppConstants.loginStatus) {
+                        if (!AppConstants.LOGIN_STATUS) {
                             LoginTipDialog loginTipDialog = new LoginTipDialog(MainActivity.this);
                             loginTipDialog.show();
                         } else {
@@ -190,7 +190,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                         }
                         break;
                     case R.id.nav_jobApplied:   //查看我报名的工作
-                        if (!AppConstants.loginStatus) {
+                        if (!AppConstants.LOGIN_STATUS) {
                             LoginTipDialog loginTipDialog = new LoginTipDialog(MainActivity.this);
                             loginTipDialog.show();
                         } else {
@@ -199,17 +199,17 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
                         }
                         break;
                     case R.id.nav_exit:
-                        if (!AppConstants.loginStatus) {
+                        if (!AppConstants.LOGIN_STATUS) {
                             ExitTipDialog exitTipDialog = new ExitTipDialog(MainActivity.this);
                             exitTipDialog.show();
                         } else {
                             LogoutTipDialog logoutTipDialog = new LogoutTipDialog(MainActivity.this, new LogoutTipDialog.ILogout() {
                                 @Override
                                 public void userLogout() {
-                                    ACache aCache = ACache.get(MyApplication.getContext());       //清空缓存 token和personalinfo
+                                    ACache aCache = ACache.get(JobGoApplication.getContext());       //清空缓存 token和personalinfo
                                     aCache.remove(CacheConstants.LOGIN_TOKEN);
                                     aCache.remove(CacheConstants.PERSONAL_INFO);
-                                    AppConstants.loginStatus = false;
+                                    AppConstants.LOGIN_STATUS = false;
                                     setPerInfo();
                                 }
                             });
@@ -274,7 +274,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.avatar) {
-            if (!AppConstants.loginStatus) {   //如果没有登录，点击头像登录
+            if (!AppConstants.LOGIN_STATUS) {   //如果没有登录，点击头像登录
                 Intent it = new Intent(this, LoginActivity.class);
                 startActivity(it);
             }

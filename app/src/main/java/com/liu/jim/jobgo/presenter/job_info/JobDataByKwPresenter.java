@@ -2,7 +2,7 @@ package com.liu.jim.jobgo.presenter.job_info;
 
 import android.widget.Toast;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.contract.job_info.JobDataByKwContract;
 import com.liu.jim.jobgo.entity.response.result.JobListResult;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
@@ -33,7 +33,7 @@ public class JobDataByKwPresenter implements JobDataByKwContract.IJobDataByKwPre
                     mIJobDataByKwView.showJobDataByKw(null);
                 } else {
                     total = jobListResult.getData().getData().getTotal();
-                    Toast.makeText(MyApplication.getContext(),"已为您查询到"+total+"个结果",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JobGoApplication.getContext(),"已为您查询到"+total+"个结果",Toast.LENGTH_SHORT).show();
                     mIJobDataByKwView.showJobDataByKw(jobListResult.getData().getData().getJobData());
                     page++;
                 }
@@ -58,7 +58,7 @@ public class JobDataByKwPresenter implements JobDataByKwContract.IJobDataByKwPre
     public void loadMore(String key) {
         page ++;
         if (page*10-10>total){
-            Toast.makeText(MyApplication.getContext(),"抱歉，已无更多结果",Toast.LENGTH_SHORT).show();
+            Toast.makeText(JobGoApplication.getContext(),"抱歉，已无更多结果",Toast.LENGTH_SHORT).show();
         }else {
             mIJobDataByKwModel.getJobDataByKw(key, new IHttpCallBack<JobListResult>() {
                 @Override

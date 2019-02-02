@@ -59,7 +59,7 @@ public class JobAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (AppConstants.loginStatus == false) {
+                if (AppConstants.LOGIN_STATUS == false) {
                     Toast.makeText(jobListAc, "请先登录再试", Toast.LENGTH_SHORT).show();
                     LoginTipDialog loginTipDialog = new LoginTipDialog(jobListAc);
                     loginTipDialog.show();

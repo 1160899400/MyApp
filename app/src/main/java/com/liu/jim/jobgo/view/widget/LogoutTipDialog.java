@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 
 /**
  * 退出登录时弹出的对话框
@@ -37,7 +37,7 @@ public class LogoutTipDialog extends TipDialog {
             @Override
             public void onYesClick() {
                 LogoutTipDialog.this.logout.userLogout();
-                Toast.makeText(MyApplication.getContext(),"已退出登录",Toast.LENGTH_SHORT).show();
+                Toast.makeText(JobGoApplication.getContext(),"已退出登录",Toast.LENGTH_SHORT).show();
                 LogoutTipDialog.this.dismiss();
             }
         });

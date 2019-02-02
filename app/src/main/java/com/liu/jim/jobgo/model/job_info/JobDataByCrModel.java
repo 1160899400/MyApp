@@ -1,7 +1,7 @@
 package com.liu.jim.jobgo.model.job_info;
 
 import com.google.gson.GsonBuilder;
-import com.liu.jim.jobgo.MyApplication;
+import com.liu.jim.jobgo.JobGoApplication;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataByCrContract;
 import com.liu.jim.jobgo.entity.request.JobCriteriaRequest;
@@ -63,8 +63,8 @@ public class JobDataByCrModel implements JobDataByCrContract.IJobDataByCrModel {
      */
     private JobCriteriaRequest initJobDataByCrReq(List<String> jobTypes, Area area, Screen screen, int page) {
         JobCriteriaRequest jobCriteriaRequest = new JobCriteriaRequest();
-        jobCriteriaRequest.setAccountId(CacheManager.getCacheManager().getAccountId(MyApplication.getContext()));
-        jobCriteriaRequest.setToken(CacheManager.getCacheManager().getToken(MyApplication.getContext()));
+        jobCriteriaRequest.setAccountId(CacheManager.getCacheManager().getAccountId(JobGoApplication.getContext()));
+        jobCriteriaRequest.setToken(CacheManager.getCacheManager().getToken(JobGoApplication.getContext()));
         jobCriteriaRequest.setPosition(AppConstants.position);
         jobCriteriaRequest.setArea(area);
         jobCriteriaRequest.setScreen(screen);
