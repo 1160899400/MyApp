@@ -4,7 +4,7 @@
 
 目前App的大概的样子如下：
 
-![](image/AppIntroduction1.jpg)![](image/AppIntroduction2.jpg)![](image/AppIntroduction3.jpg)
+&emsp;&emsp; ![引导页](image/AppIntroduction1.jpg) &emsp;&emsp; ![主页](image/AppIntroduction2.jpg) &emsp;&emsp; ![用户抽屉页](image/AppIntroduction3.jpg)
 
 
 项目开始时是使用的研究生学长搭的服务器后台，现在尝试为这个项目单独写个简单的后台，总之，任重而道远.....
