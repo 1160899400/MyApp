@@ -8,7 +8,6 @@ import com.liu.jim.jobgo.entity.request.JobCriteriaRequest;
 import com.liu.jim.jobgo.entity.response.bean.Area;
 import com.liu.jim.jobgo.entity.response.bean.Screen;
 import com.liu.jim.jobgo.entity.response.result.JobListResult;
-import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.inf.IHttpService;

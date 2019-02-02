@@ -18,6 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public abstract class BaseHttpClient {
 
+    /**
+     * service缓存
+     */
     protected HashMap<Class, Object> serviceCache;
 
     /**

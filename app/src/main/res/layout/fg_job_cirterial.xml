@@ -13,7 +13,7 @@
         android:minHeight="40dp"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatSpinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_city"
             style="@android:style/Theme.Holo.DialogWhenLarge"
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
 
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_job_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,6 +51,6 @@
         <ListView
             android:id="@+id/job_list"
             style="@style/list_view_style" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

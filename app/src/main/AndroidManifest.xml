@@ -76,6 +76,7 @@
         </service>
 
 
+        <!--对18:9以及其它比例的屏幕适配-->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.3"/>

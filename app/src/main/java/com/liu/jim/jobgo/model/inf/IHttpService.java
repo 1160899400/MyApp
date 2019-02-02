@@ -50,8 +50,7 @@ public interface IHttpService {
     @POST("jobmanage/myJobList.do")             // 查看我报名的岗位信息
     Observable<JobSignedResult> getJobSigned(@Body RequestBody send);
 
-    @POST("accountInfo/update.do")          //修改个人信息
-    Observable<ModifyInfoResult> modInfo(@Body RequestBody send);
+
 
     @POST("jobmanage/getjoblist.do")        // 查看正在热招中的兼职
     Observable<JobListResult> getJobDataHiring(@Body RequestBody send);

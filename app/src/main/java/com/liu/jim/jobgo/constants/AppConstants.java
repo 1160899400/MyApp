@@ -11,8 +11,13 @@ import com.liu.jim.jobgo.entity.response.bean.Position;
 //http://101.132.40.16/OrangeServer/
 
 public class AppConstants {
-    public final static String SERVER_URL = "http://106.14.196.121/OrangeServer/";   //服务器地址
+    /**
+     * 服务器地址
+     */
+    public final static String SERVER_URL = "http://106.14.196.121/OrangeServer/";
+
     public final static int version = 2;   //1代表招聘版，2代表求职版，本版本为求职版
+
     public final static String host = "okHttp";   //请求主机
     public final static String driverType = "ANDROID";   //请求客户端
     public final static String driverId = "1234567898764532";  //加载id

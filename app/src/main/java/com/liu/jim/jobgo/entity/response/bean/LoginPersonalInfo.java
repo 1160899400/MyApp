@@ -6,6 +6,7 @@ package com.liu.jim.jobgo.entity.response.bean;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.liu.jim.jobgo.db.model.Account;
 
 public class LoginPersonalInfo {
 
@@ -18,9 +19,9 @@ public class LoginPersonalInfo {
     @SerializedName("accountEmail")
     @Expose
     private String accountEmail;
-    @SerializedName("applicant")
+    @SerializedName("account")
     @Expose
-    private Applicant applicant;
+    private Account account;
 
     public int getAccountId() {
         return accountId;
@@ -46,12 +47,12 @@ public class LoginPersonalInfo {
         this.accountEmail = accountEmail;
     }
 
-    public Applicant getApplicant() {
-        return applicant;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setApplicant(Applicant applicant) {
-        this.applicant = applicant;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }

@@ -5,7 +5,6 @@ import com.liu.jim.jobgo.MyApplication;
 import com.liu.jim.jobgo.contract.job_info.JobSignedContract;
 import com.liu.jim.jobgo.entity.request.JobSignedRequest;
 import com.liu.jim.jobgo.entity.response.result.JobSignedResult;
-import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.inf.IHttpService;

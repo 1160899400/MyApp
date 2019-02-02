@@ -2,8 +2,8 @@ package com.liu.jim.jobgo.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.v4.util.SimpleArrayMap;
+import androidx.annotation.NonNull;
+import androidx.collection.SimpleArrayMap;
 
 import com.liu.jim.jobgo.MyApplication;
 

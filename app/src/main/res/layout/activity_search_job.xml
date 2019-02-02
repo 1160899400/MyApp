@@ -11,7 +11,7 @@
         android:background="@drawable/selector_search_view"
         android:queryHint="请输入搜索内容"></android.widget.SearchView>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_job_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,5 +24,5 @@
             android:divider="@null"
             android:fadeScrollbars="true"
             android:overScrollMode="never" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

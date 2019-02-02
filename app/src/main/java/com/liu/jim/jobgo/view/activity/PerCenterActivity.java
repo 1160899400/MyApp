@@ -10,11 +10,11 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -34,14 +34,10 @@ import com.liu.jim.jobgo.base.BaseActivity;
 import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.ModifyInfoContract;
-import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
-import com.liu.jim.jobgo.entity.response.bean.Account;
-import com.liu.jim.jobgo.entity.response.bean.Applicant;
+import com.liu.jim.jobgo.db.model.Account;
 import com.liu.jim.jobgo.manager.ActivityManager;
-import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.ModInfoPresenter;
-import com.liu.jim.jobgo.util.ACache;
 import com.liu.jim.jobgo.util.BitmapUtil;
 
 import java.text.SimpleDateFormat;
@@ -124,13 +120,13 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
             ModifyInfoRequest myInfo = new Gson().fromJson(personalInfo, ModifyInfoRequest.class);
             accountId = myInfo.getAccountId();
             email = myInfo.getAccount().getAccountEmail();
-            realname = myInfo.getApplicant().getAppRealname();
-            govid = myInfo.getApplicant().getAppGovid();
-            intr = myInfo.getApplicant().getAppDescript();
-            photolink = myInfo.getApplicant().getAppPhotolink();
-            gender = myInfo.getApplicant().getAppGender();
-            birth = myInfo.getApplicant().getAppBirth();
-            edu = myInfo.getApplicant().getAppEdu();
+            realname = myInfo.getAccount().getAppRealname();
+            govid = myInfo.getAccount().getAppGovid();
+            intr = myInfo.getAccount().getAppDescript();
+            photolink = myInfo.getAccount().getAppPhotolink();
+            gender = myInfo.getAccount().getAppGender();
+            birth = myInfo.getAccount().getAppBirth();
+            edu = myInfo.getAccount().getAppEdu();
             phone = CacheManager.getCacheManager().getAccountPhone();
             avatar = CacheManager.getCacheManager().getAvatar(MyApplication.getContext());
         }
@@ -558,77 +554,77 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
         ModifyInfoRequest mir = new ModifyInfoRequest();
         mir.setToken(Token);
         mir.setAccountId(accountId);
-        Account account = new Account();
-        Applicant applicant = new Applicant();
-        applicant.setAppGender(gender);
-        applicant.setAppEdu(edu);
+        com.liu.jim.jobgo.entity.response.bean.Account account = new com.liu.jim.jobgo.entity.response.bean.Account();
+        Account accountInfo = new Account();
+        accountInfo.setGender(gender);
+        accountInfo.setAppEdu(edu);
         switch (reqType) {
             case REQ_MOD_NICKNAME:   //修改 用户名
                 account.setAccountName(modStr);
                 account.setAccountEmail(email);
-                applicant.setAppRealname(realname);
-                applicant.setAppGovid(govid);
-                applicant.setAppDescript(intr);
-                applicant.setAppPhotolink(photolink);
-                applicant.setAppBirth(birth);
+                accountInfo.setAppRealname(realname);
+                accountInfo.setAppGovid(govid);
+                accountInfo.setAppDescript(intr);
+                accountInfo.setAppPhotolink(photolink);
+                accountInfo.setAppBirth(birth);
                 break;
             case REQ_MOD_NAME:  //修改真实名字
                 account.setAccountEmail(email);
-                applicant.setAppRealname(modStr);
-                applicant.setAppGovid(govid);
-                applicant.setAppDescript(intr);
-                applicant.setAppPhotolink(photolink);
-                applicant.setAppBirth(birth);
+                accountInfo.setAppRealname(modStr);
+                accountInfo.setAppGovid(govid);
+                accountInfo.setAppDescript(intr);
+                accountInfo.setAppPhotolink(photolink);
+                accountInfo.setAppBirth(birth);
                 break;
             case REQ_MOD_EMAIL:  //修改邮箱
                 account.setAccountName(nickname);
                 account.setAccountEmail(modStr);
-                applicant.setAppRealname(realname);
-                applicant.setAppGovid(govid);
-                applicant.setAppDescript(intr);
-                applicant.setAppPhotolink(photolink);
-                applicant.setAppBirth(birth);
+                accountInfo.setAppRealname(realname);
+                accountInfo.setAppGovid(govid);
+                accountInfo.setAppDescript(intr);
+                accountInfo.setAppPhotolink(photolink);
+                accountInfo.setAppBirth(birth);
                 break;
             case REQ_MOD_GOVID:  //修改身份证号
                 account.setAccountName(nickname);
                 account.setAccountEmail(email);
-                applicant.setAppRealname(realname);
-                applicant.setAppGovid(modStr);
-                applicant.setAppDescript(intr);
-                applicant.setAppPhotolink(photolink);
-                applicant.setAppBirth(birth);
+                accountInfo.setAppRealname(realname);
+                accountInfo.setAppGovid(modStr);
+                accountInfo.setAppDescript(intr);
+                accountInfo.setAppPhotolink(photolink);
+                accountInfo.setAppBirth(birth);
                 break;
             case REQ_MOD_INTRODUCTION:  //修改个人介绍
                 account.setAccountName(nickname);
                 account.setAccountEmail(email);
-                applicant.setAppRealname(realname);
-                applicant.setAppGovid(govid);
-                applicant.setAppDescript(modStr);
-                applicant.setAppPhotolink(photolink);
-                applicant.setAppBirth(birth);
+                accountInfo.setAppRealname(realname);
+                accountInfo.setAppGovid(govid);
+                accountInfo.setAppDescript(modStr);
+                accountInfo.setAppPhotolink(photolink);
+                accountInfo.setAppBirth(birth);
                 break;
             case REQ_MOD_AVATAR:  //修改头像
                 account.setAccountName(nickname);
                 account.setAccountEmail(email);
-                applicant.setAppRealname(realname);
-                applicant.setAppGovid(govid);
-                applicant.setAppDescript(intr);
-                applicant.setAppPhotolink(modStr);
-                applicant.setAppBirth(birth);
+                accountInfo.setAppRealname(realname);
+                accountInfo.setAppGovid(govid);
+                accountInfo.setAppDescript(intr);
+                accountInfo.setAppPhotolink(modStr);
+                accountInfo.setAppBirth(birth);
                 break;
             case REQ_MOD_BIRTH:
                 account.setAccountName(nickname);
                 account.setAccountEmail(email);
-                applicant.setAppRealname(realname);
-                applicant.setAppGovid(govid);
-                applicant.setAppDescript(intr);
-                applicant.setAppPhotolink(photolink);
-                applicant.setAppBirth(modStr);
+                accountInfo.setAppRealname(realname);
+                accountInfo.setAppGovid(govid);
+                accountInfo.setAppDescript(intr);
+                accountInfo.setAppPhotolink(photolink);
+                accountInfo.setAppBirth(modStr);
                 break;
 
         }
         mir.setAccount(account);
-        mir.setApplicant(applicant);
+        mir.setAccount(accountInfo);
         return mir;
     }
 
@@ -643,15 +639,15 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
         ModifyInfoRequest mir = new ModifyInfoRequest();
         mir.setToken(Token);
         mir.setAccountId(accountId);
-        Account account = new Account();
-        Applicant applicant = new Applicant();
-        applicant.setAppRealname(realname);
+        com.liu.jim.jobgo.entity.response.bean.Account account = new com.liu.jim.jobgo.entity.response.bean.Account();
+        Account accountInfo = new Account();
+        accountInfo.setAppRealname(realname);
         account.setAccountName(nickname);
         account.setAccountEmail(email);
-        applicant.setAppGovid(govid);
-        applicant.setAppDescript(intr);
-        applicant.setAppPhotolink(photolink);
-        applicant.setAppBirth(birth);
+        accountInfo.setAppGovid(govid);
+        accountInfo.setAppDescript(intr);
+        accountInfo.setAppPhotolink(photolink);
+        accountInfo.setAppBirth(birth);
         System.out.println("gengder: " + modInt);
         switch (reqType) {
             case REQ_MOD_GENDER:
@@ -661,17 +657,17 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
                 } else {
                     a = -1;
                 }
-                applicant.setAppGender(a);
-                applicant.setAppEdu(edu);
+                accountInfo.setGender(a);
+                accountInfo.setAppEdu(edu);
                 break;
             case REQ_MOD_EDU:
                 modInt += 1;
-                applicant.setAppEdu(modInt);
-                applicant.setAppGender(gender);
+                accountInfo.setAppEdu(modInt);
+                accountInfo.setGender(gender);
                 break;
         }
         mir.setAccount(account);
-        mir.setApplicant(applicant);
+        mir.setAccount(accountInfo);
         return mir;
     }
 
@@ -692,32 +688,32 @@ public class PerCenterActivity extends BaseActivity implements ViewGroup.OnClick
 
     @Override
     public void showModInfo(ModifyInfoRequest modifyInfoRequest, int reqType) {
-        Account account = modifyInfoRequest.getAccount();
-        Applicant applicant = modifyInfoRequest.getApplicant();
+        com.liu.jim.jobgo.entity.response.bean.Account account = modifyInfoRequest.getAccount();
+        Account accountInfo = modifyInfoRequest.getAccount();
         switch (reqType) {   //修改控件上的显示和内存中的数据,并写入缓存
             case REQ_MOD_NICKNAME:
                 nickname = account.getAccountName();
                 break;
             case REQ_MOD_NAME:
-                realname = applicant.getAppRealname();
+                realname = accountInfo.getAppRealname();
                 break;
             case REQ_MOD_EMAIL:
                 email = account.getAccountEmail();
                 break;
             case REQ_MOD_GOVID:
-                govid = applicant.getAppGovid();
+                govid = accountInfo.getAppGovid();
                 break;
             case REQ_MOD_INTRODUCTION:
-                intr = applicant.getAppDescript();
+                intr = accountInfo.getAppDescript();
                 break;
             case REQ_MOD_EDU:
-                edu = applicant.getAppEdu();
+                edu = accountInfo.getAppEdu();
                 break;
             case REQ_MOD_GENDER:
-                gender = applicant.getAppGender();
+                gender = accountInfo.getGender();
                 break;
             case REQ_MOD_BIRTH:
-                birth = applicant.getAppBirth();
+                birth = accountInfo.getAppBirth();
                 break;
             case REQ_MOD_AVATAR:
                 // 保存新头像在缓存文件中

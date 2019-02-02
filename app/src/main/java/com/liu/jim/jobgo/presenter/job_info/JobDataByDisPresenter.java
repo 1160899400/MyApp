@@ -1,6 +1,6 @@
 package com.liu.jim.jobgo.presenter.job_info;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,10 +12,8 @@ import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataByDisContract;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
 import com.liu.jim.jobgo.entity.response.result.JobListResult;
-import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.job_info.JobDataByDisModel;
-import com.liu.jim.jobgo.util.ACache;
 
 import java.util.LinkedList;
 import java.util.List;

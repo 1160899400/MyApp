@@ -14,7 +14,7 @@ public interface SpKey {
     /**
      * 上次登录的token，用于检测用户登录状态
      */
-    String LAST_LOGIN_TOKEN = "lt";
+    String LAST_LOGIN_TOKEN = "LLT";
 
 
 

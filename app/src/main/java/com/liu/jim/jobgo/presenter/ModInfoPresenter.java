@@ -1,9 +1,7 @@
 package com.liu.jim.jobgo.presenter;
 
 import com.liu.jim.jobgo.contract.ModifyInfoContract;
-import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
 import com.liu.jim.jobgo.entity.response.result.ModifyInfoResult;
-import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.model.ModInfoModel;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 

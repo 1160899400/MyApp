@@ -5,21 +5,21 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/login_appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:title="@string/login_title"
             app:titleTextColor="@android:color/white">
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <ImageView
@@ -34,7 +34,7 @@
         android:minWidth="70dp" />
 
     <!--设置最大长度-->
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_phone"
         style="@style/Til"
         android:layout_below="@+id/iv_app_icon"
@@ -49,9 +49,9 @@
             style="@style/et_single_line"
             android:hint="@string/phone"
             android:inputType="phone"/>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_pwd"
         style="@style/Til"
         android:layout_below="@+id/til_phone"
@@ -67,7 +67,7 @@
             style="@style/et_single_line"
             android:hint="@string/pwd"
             android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_login_message"

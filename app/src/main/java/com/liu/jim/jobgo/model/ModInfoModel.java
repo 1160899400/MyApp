@@ -2,7 +2,6 @@ package com.liu.jim.jobgo.model;
 
 import com.google.gson.Gson;
 import com.liu.jim.jobgo.contract.ModifyInfoContract;
-import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
 import com.liu.jim.jobgo.entity.response.result.ModifyInfoResult;
 import com.liu.jim.jobgo.manager.RetrofitManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;

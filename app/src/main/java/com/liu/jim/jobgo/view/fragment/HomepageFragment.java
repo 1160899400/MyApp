@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +28,6 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.liu.jim.ILocationManager;
 import com.liu.jim.jobgo.R;
 import com.liu.jim.jobgo.base.BaseFragment;
-import com.liu.jim.jobgo.constants.AppConstants;
 import com.liu.jim.jobgo.contract.job_info.JobDataByDisContract;
 import com.liu.jim.jobgo.db.model.Location;
 import com.liu.jim.jobgo.entity.response.bean.JobBasicInfo;
@@ -41,7 +40,6 @@ import com.liu.jim.locator.LocationService;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 /**

@@ -1,10 +1,7 @@
 package com.liu.jim.jobgo.base;
 
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
-import com.liu.jim.jobgo.util.UIUtil;
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
 

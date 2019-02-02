@@ -64,7 +64,7 @@ public class Job {
     private String payType;
 
     @SerializedName("gender")
-    private String jobGender;
+    private Byte jobGender;
 
     @SerializedName("needStudent")
     private boolean needStudent;
@@ -159,11 +159,11 @@ public class Job {
         this.payType = payType;
     }
 
-    public String getJobGender() {
+    public Byte getJobGender() {
         return jobGender;
     }
 
-    public void setJobGender(String jobGender) {
+    public void setJobGender(Byte jobGender) {
         this.jobGender = jobGender;
     }
 

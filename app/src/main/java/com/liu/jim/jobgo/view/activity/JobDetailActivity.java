@@ -21,12 +21,10 @@ import com.liu.jim.jobgo.contract.ApplyJobContract;
 import com.liu.jim.jobgo.contract.job_info.JobDetailContract;
 import com.liu.jim.jobgo.db.model.Job;
 import com.liu.jim.jobgo.db.model.Location;
-import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
 import com.liu.jim.jobgo.manager.ActivityManager;
 import com.liu.jim.jobgo.manager.NoticeManager;
 import com.liu.jim.jobgo.presenter.ApplyJobPresenter;
 import com.liu.jim.jobgo.presenter.job_info.JobDetailPresenter;
-import com.liu.jim.jobgo.util.ACache;
 
 /**
  * Created by jim on 2018/4/5.

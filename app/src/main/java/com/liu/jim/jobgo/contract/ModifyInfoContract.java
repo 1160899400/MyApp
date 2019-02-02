@@ -1,6 +1,5 @@
 package com.liu.jim.jobgo.contract;
 
-import com.liu.jim.jobgo.entity.request.ModifyInfoRequest;
 import com.liu.jim.jobgo.entity.response.result.ModifyInfoResult;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 

@@ -8,10 +8,8 @@ import com.liu.jim.jobgo.constants.CacheConstants;
 import com.liu.jim.jobgo.contract.user_auth.MsgLoginContract;
 import com.liu.jim.jobgo.entity.response.bean.LoginPersonalInfo;
 import com.liu.jim.jobgo.entity.response.result.LoginResult;
-import com.liu.jim.jobgo.manager.CacheManager;
 import com.liu.jim.jobgo.model.inf.IHttpCallBack;
 import com.liu.jim.jobgo.model.user_auth.MsgLoginModel;
-import com.liu.jim.jobgo.util.ACache;
 
 /**
  * Created by jim on 2018/4/26.
